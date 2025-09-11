@@ -1,59 +1,286 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Early Bird 🐦</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #f59e0b, #fcd34d);
-      color: #1f2937;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    p {
-      font-size: 1.2rem;
-      margin: 0 1rem 2rem;
-      max-width: 400px;
-    }
-    .button {
-      padding: 0.8rem 1.5rem;
-      background: #1f2937;
-      color: #fcd34d;
-      text-decoration: none;
-      border-radius: 9999px;
-      font-weight: bold;
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-    .button:hover {
-      background: #111827;
-      transform: scale(1.05);
-    }
-    footer {
-      position: absolute;
-      bottom: 1rem;
-      font-size: 0.9rem;
-      color: #374151;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Early Bird 🐦</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #f59e0b, #fcd34d);
+            color: #1f2937;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 0 1rem 2rem;
+            max-width: 400px;
+        }
+
+         #startButton {
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(45deg, #8b5cf6, #a78bfa);
+            /* violet doux  */
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        } 
+
+
+        #startButton:hover {
+            background: #111827;
+            transform: scale(1.05);
+        }
+
+
+        #gameContainer {
+            position: relative;
+            display: none;
+            /* Caché au départ */
+        }
+
+        #closeGame {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #1f2937;
+            color: #fcd34d;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.2rem;
+            line-height: 30px;
+            z-index: 2000;
+            /*augmentez le z-index pour qu’elle soit au-dessus de tout */
+        }
+
+        #game {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            border: 2px solid #1f2937;
+            background: #fef3c7;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+
+        }
+
+        #bird {
+            display: none;
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: url("../Images/bird.png") no-repeat center/contain;
+            cursor: pointer;
+            z-index: 500;
+            /* <-- plus petit que la croix */
+        }
+
+        #score {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: none;
+            /* Caché au départ */
+        }
+
+        /* Overlay instructions */
+        #instructionsOverlay {
+            position: absolute;
+            top: 0%;
+            left: 0%;            
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            font-size: 1rem;
+            padding: 1rem;
+
+            border-radius: 10px;
+            z-index: 1000;
+
+        }
+
+        #countdown {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+
+        .button {
+            padding: 0.8rem 1.5rem;
+            background: #1f2937;
+            color: #fcd34d;
+            text-decoration: none;
+            border-radius: 9999px;
+            font-weight: bold;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .button:hover {
+            background: #111827;
+            transform: scale(1.05);
+        }
+
+        footer {
+            position: absolute;
+            bottom: 1rem;
+            font-size: 0.9rem;
+            color: #374151;
+        }
+    </style>
 </head>
+
 <body>
-  <h1>🐦 Early Bird détecté !</h1>
-  <p>Tu es arrivé(e) un peu trop tôt... Le site n’est pas encore ouvert.  
-     Reviens après la date officielle pour découvrir la landing du jour 🎉</p>
+    <h1>🐦 Early Bird détecté !</h1>
+    <p>
+        Je te vois 👀 Tu n'as rien à faire là <br>
+        Reviens plus tard
+    </p>
 
-  <a href="#" class="button">Revenir plus tard</a>
 
-  <footer>Merci pour ton impatience ❤️</footer>
+    <button id="startButton">Un petit jeu pour patienter</button>
+
+    <div id="gameContainer">
+        <button id="closeGame">✖</button>
+        <div id="game">
+            <div id="bird"></div>        
+            <div id="instructionsOverlay" style="display:none;">
+            <p>Attrape moi si tu peux <br> 😝</p>
+        </div>
+
+        </div>
+    </div>
+
+    <div id="score">Score : 0</div>
+
+    <!-- Compte à rebours -->
+    <div id="countdown">Chargement du compte à rebours...</div>
+
+    <a href="/index.html" class="button">Revenir plus tard</a>
+
+
+
+    <script>
+        //Jeu de l'oiseau
+        const bird = document.getElementById("bird");
+        const game = document.getElementById("game");
+        const gameContainer = document.getElementById("gameContainer");
+        const scoreDisplay = document.getElementById("score");
+        const startButton = document.getElementById("startButton");
+        const closeGame = document.getElementById("closeGame");
+        const instructionsOverlay = document.getElementById("instructionsOverlay");
+
+        let score = 0;
+        let moveInterval = 2000; // Intervalle initial (2s)
+        let gameInterval;
+
+        function moveBird() {
+            const x = Math.random() * (game.clientWidth - bird.clientWidth);
+            const y = Math.random() * (game.clientHeight - bird.clientHeight);
+            bird.style.left = x + "px";
+            bird.style.top = y + "px";
+        }
+
+        bird.addEventListener("click", () => {
+            score++;
+            scoreDisplay.textContent = "Score : " + score;
+
+            // Réduire l'intervalle pour rendre le jeu plus rapide
+            moveInterval = Math.max(500, 2000 - score * 100); // minimum 0.5s
+            clearInterval(gameInterval);
+            gameInterval = setInterval(moveBird, moveInterval);
+
+            moveBird(); // Déplacer immédiatement après le clic
+        });
+
+        startButton.addEventListener("click", () => {
+            startButton.style.display = "none";
+            instructionsOverlay.style.display = "flex";
+            gameContainer.style.display = "block";
+            scoreDisplay.style.display = "block";
+            countdown.style.display = "none";
+            score = 0;
+            moveInterval = 2000;
+
+            // Attendre 3 secondes avant de lancer le jeu
+            setTimeout(() => {
+                instructionsOverlay.style.display = "none";
+                bird.style.display = "block";
+                bird.style.left = (gameContainer.clientWidth - bird.clientWidth) / 2 + "px";
+                bird.style.top = (gameContainer.clientHeight - bird.clientHeight) / 2 + "px";
+                //moveBird();
+                gameInterval = setInterval(moveBird, moveInterval);
+            }, 3000);
+        });
+
+        closeGame.addEventListener("click", () => {
+            gameContainer.style.display = "none";
+            scoreDisplay.style.display = "none";
+            startButton.style.display = "inline-block";
+            countdown.style.display = "block";
+
+            clearInterval(gameInterval);
+        });
+    </script>
+
+
+    <script>
+        //timer pour le compte à rebours
+        // 📅 Date de lancement officielle (AAAA, MM-1, JJ, HH, MM, SS)
+        const launchDate = new Date(2025, 8, 22, 0, 0, 0).getTime(); // 22 sept. 2025 à minuit
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = launchDate - now;
+
+            if (diff <= 0) {
+                document.getElementById("countdown").innerHTML = "🚀 Le site est ouvert ! Recharge la page.";
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").innerHTML = `${days}j ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        // Mise à jour toutes les secondes
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+
+    <footer>❤️ Je t'aime ❤️</footer>
 </body>
+
 </html>
