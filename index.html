@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page du Jour</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <p>Chargement de la page du jour...</p>
+  <script>
+    // Récupère le numéro du jour (1 à 31)
+    const today = new Date();
+    const day = today.getDate();
+
+    // Exemple : on suppose que tu as 31 pages (day1.html, day2.html, etc.)
+    const targetPage = `pages/${day}.html`;
+
+    // Redirige vers la page du jour
+    window.location.href = targetPage;
+  </script>
+</body>
+</html>
