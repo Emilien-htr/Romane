@@ -22,11 +22,20 @@
     const today = new Date();
     const day = today.getDate();
 
-    // Exemple : on suppose que tu as 31 pages (day1.html, day2.html, etc.)
-    const targetPage = `pages/${day}.html`;
 
-    // Redirige vers la page du jour
-    window.location.href = targetPage;
+    const limitDate = new Date(2025, 8, 22); // 22 septembre 2025 (mois 0-indexé)
+
+    if (today < limitDate) {
+      // Avant la date limite → page spéciale
+      window.location.href = "pages/earlybird.html";
+    } else {
+      // Après la date limite → rotation mensuelle
+      const day = today.getDate(); // 1 → 31
+      const targetPage = `pages/${day}.html`;
+      //redirection vers la page du jour
+      window.location.href = targetPage;
+    }
   </script>
+  
 </body>
 </html>

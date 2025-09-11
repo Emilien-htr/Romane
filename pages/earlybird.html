@@ -1,1 +1,59 @@
-.
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Early Bird 🐦</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #f59e0b, #fcd34d);
+      color: #1f2937;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.2rem;
+      margin: 0 1rem 2rem;
+      max-width: 400px;
+    }
+    .button {
+      padding: 0.8rem 1.5rem;
+      background: #1f2937;
+      color: #fcd34d;
+      text-decoration: none;
+      border-radius: 9999px;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .button:hover {
+      background: #111827;
+      transform: scale(1.05);
+    }
+    footer {
+      position: absolute;
+      bottom: 1rem;
+      font-size: 0.9rem;
+      color: #374151;
+    }
+  </style>
+</head>
+<body>
+  <h1>🐦 Early Bird détecté !</h1>
+  <p>Tu es arrivé(e) un peu trop tôt... Le site n’est pas encore ouvert.  
+     Reviens après la date officielle pour découvrir la landing du jour 🎉</p>
+
+  <a href="#" class="button">Revenir plus tard</a>
+
+  <footer>Merci pour ton impatience ❤️</footer>
+</body>
+</html>
