@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album Polaroid</title>
+    <style>
+        .nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            color: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .nav.left {
+            left: 10px;
+        }
+
+        .nav.right {
+            right: 10px;
+        }
+
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Georgia", serif;
+            background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #444;
+            margin: 0.5rem 0;
+            max-width: 90%;
+        }
+
+        /* Style polaroid */
+        .polaroid {
+            max-width: 90%;
+            width: 320px;
+            background: white;
+            padding: 10px 10px 40px 10px;
+            /* plus d'espace en bas */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 6px;
+            margin: 1.5rem 0;
+            text-align: center;
+            touch-action: pan-y;
+        }
+
+        .polaroid img {
+            width: 100%;
+            display: block;
+            border-radius: 4px;
+            opacity: 1;
+            transition: opacity 0.6s ease;
+            /* transition douce */
+        }
+
+        .polaroid.fade-out img {
+            opacity: 0;
+        }
+
+        .caption {
+            font-size: 0.9rem;
+            color: #333;
+            font-family: "Caveat", cursive, sans-serif;
+            /* écriture manuscrite */
+            margin-top: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .quote {
+                font-size: 1rem;
+            }
+
+            .caption {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- /* Navigation flèches */  -->
+    <div class="nav left" onclick="prevPhoto()">&#10094;</div>
+    <div class="nav right" onclick="nextPhoto()">&#10095;</div>
+
+    <p class="quote top" id="quoteTop">« Le bonheur se trouve dans les petites choses. »</p>
+
+    <div class="polaroid" id="photoContainer">
+        <img id="photo" src="/Images/d0e1054c831568829b75b8a2eeb269f3.jpg" alt="Photo du jour">
+        <p class="caption" id="caption">Un souvenir, un instant, une lumière douce ✨</p>
+    </div>
+
+    <p class="quote bottom" id="quoteBottom">Swipe pour découvrir d’autres souvenirs ➡️</p>
+
+    <script>
+        const photos = [
+            {
+                img: "/Images/d0e1054c831568829b75b8a2eeb269f3.jpg",
+                top: "« Le bonheur se trouve dans les petites choses. »",
+                bottom: "Un souvenir, un instant, une lumière douce ✨",
+                caption: "Un souvenir, un instant, une lumière douce ✨"
+
+            },
+            {
+                img: "/Images/IMG-20241125-WA0010.jpg",
+                top: "« Chaque jour est une nouvelle page à écrire. »",
+                bottom: "La douceur des instants simples 🌸",
+                caption: "siuuuu ✨"
+            },
+            {
+                img: "/Images/IMG-20250818-WA0064.jpg",
+                top: "« Chaque jour est une nouvelle page à écrire. »",
+                bottom: "La douceur des instants simples 🌸"
+            }
+        ];
+
+        let current = 0;
+
+        function updatePhoto(direction = "next") {
+            const photoContainer = document.getElementById("photoContainer");
+            const photo = document.getElementById("photo");
+
+            // Déclenche fade out
+            photoContainer.classList.add("fade-out");
+
+            setTimeout(() => {
+                // Changement de contenu
+                document.getElementById("photo").src = photos[current].img;
+                document.getElementById("quoteTop").textContent = photos[current].top;
+                document.getElementById("quoteBottom").textContent = photos[current].bottom;
+                document.getElementById("caption").textContent = photos[current].caption;
+
+                // Ré-affiche avec fade-in
+                photoContainer.classList.remove("fade-out");
+            }, 600); // durée de la transition
+        }
+
+        // Gestion du swipe
+        const photoContainer = document.getElementById("photoContainer");
+        let startX = 0;
+
+        photoContainer.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        photoContainer.addEventListener("touchend", (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+
+            if (Math.abs(diff) > 50) { // seuil de swipe
+                if (diff > 0) {
+                    // swipe gauche → photo suivante
+                    current = (current + 1) % photos.length;
+                } else {
+                    // swipe droite → photo précédente
+                    current = (current - 1 + photos.length) % photos.length;
+                }
+                updatePhoto();
+            }
+        });
+
+        // Navigation flèches
+        function prevPhoto() {
+            current = (current - 1 + photos.length) % photos.length;
+            updatePhoto();
+        }
+
+        function nextPhoto() {
+            current = (current + 1) % photos.length;
+            updatePhoto();
+        }
+    </script>
+</body>
+
+</html>

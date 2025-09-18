@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album - Page 1</title>
+    <style>
+        /* Navigation flèches */    
+        .nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            color: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .nav.left { left: 10px; }
+        .nav.right { right: 10px; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Georgia", serif;
+            background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #444;
+            margin: 0.5rem 0;
+            max-width: 90%;
+        }
+
+        .photo-frame {
+            max-width: 90%;
+            width: 350px;
+            border: 4px solid #fff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+            touch-action: pan-y;
+            /* permet le swipe horizontal */
+        }
+
+        .photo-frame img {
+            width: 100%;
+            display: block;
+        }
+
+         /* Adaptation mobile */
+        @media (max-width: 600px) {
+            .quote {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- /* Navigation flèches */  -->
+    <div class="nav left" onclick="prevPhoto()">&#10094;</div>
+    <div class="nav right" onclick="nextPhoto()">&#10095;</div>
+
+    <p class="quote top" id="quoteTop">« Le bonheur se trouve dans les petites choses. »</p>
+
+    <div class="photo-frame" id="photoContainer">
+        <img id="photo" src="/Images/d0e1054c831568829b75b8a2eeb269f3.jpg" alt="Photo du jour">
+    </div>
+
+    <p class="quote bottom" id="quoteBottom">Un souvenir, un instant, une lumière douce ✨</p>
+
+    <script>
+        // Tableau des photos et citations associées
+        const photos = [
+            {
+                img: "/Images/d0e1054c831568829b75b8a2eeb269f3.jpg",
+                top: "« Le bonheur se trouve dans les petites choses. »",
+                bottom: "Un souvenir, un instant, une lumière douce ✨"
+            },
+            {
+                img: "/Images/IMG-20250818-WA0064.jpg",
+                top: "« Chaque jour est une nouvelle page à écrire. »",
+                bottom: "La douceur des instants simples 🌸"
+            },
+            {
+                img: "/Images/IMG-20241125-WA0010.jpg",
+                top: "« La beauté réside dans les détails. »",
+                bottom: "Un éclat de lumière dans la mémoire 💫"
+            }
+        ];
+
+        let current = 0;
+
+        // Met à jour la photo et les citations affichées
+        function updatePhoto() {
+            document.getElementById("photo").src = photos[current].img;
+            document.getElementById("quoteTop").textContent = photos[current].top;
+            document.getElementById("quoteBottom").textContent = photos[current].bottom;
+        }
+
+        // Gestion du swipe
+        const photoContainer = document.getElementById("photoContainer");
+        let startX = 0;
+
+        photoContainer.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        photoContainer.addEventListener("touchend", (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+
+            if (Math.abs(diff) > 50) { // seuil de swipe
+                if (diff > 0) {
+                    // swipe gauche → photo suivante
+                    current = (current + 1) % photos.length;
+                } else {
+                    // swipe droite → photo précédente
+                    current = (current - 1 + photos.length) % photos.length;
+                }
+                updatePhoto();
+            }
+        });
+
+
+    // Navigation flèches
+    function prevPhoto() {
+      current = (current - 1 + photos.length) % photos.length;
+      updatePhoto();
+    }
+
+    function nextPhoto() {
+      current = (current + 1) % photos.length;
+      updatePhoto();
+    }
+    </script>
+</body>
+
+</html>
