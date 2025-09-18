@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Album - Page 1</title>
     <style>
-        /* Navigation flèches */    
+        /* Navigation flèches */
         .nav {
             position: fixed;
             top: 50%;
@@ -20,8 +20,14 @@
             user-select: none;
             transition: background 0.2s, transform 0.2s;
         }
-        .nav.left { left: 10px; }
-        .nav.right { right: 10px; }
+
+        .nav.left {
+            left: 10px;
+        }
+
+        .nav.right {
+            right: 10px;
+        }
 
         body {
             margin: 0;
@@ -62,7 +68,7 @@
             display: block;
         }
 
-         /* Adaptation mobile */
+        /* Adaptation mobile */
         @media (max-width: 600px) {
             .quote {
                 font-size: 1rem;
@@ -138,16 +144,16 @@
         });
 
 
-    // Navigation flèches
-    function prevPhoto() {
-      current = (current - 1 + photos.length) % photos.length;
-      updatePhoto();
-    }
+        // Navigation flèches
+        function prevPhoto() {
+            current = (current - 1 + photos.length) % photos.length;
+            updatePhoto();
+        }
 
-    function nextPhoto() {
-      current = (current + 1) % photos.length;
-      updatePhoto();
-    }
+        function nextPhoto() {
+            current = (current + 1) % photos.length;
+            updatePhoto();
+        }
     </script>
 </body>
 
