@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Album Polaroid Slide</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Georgia", serif;
+      background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.3s ease;
+      will-change: transform;
+      touch-action: pan-y;
+    }
+
+    .slide {
+      min-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Style polaroid */
+    .polaroid {
+      max-width: 90%;
+      width: 320px;
+      background: white;
+      padding: 10px 10px 40px 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      border-radius: 6px;
+      margin: 1rem 0;
+      text-align: center;
+    }
+
+    .polaroid img {
+      width: 100%;
+      display: block;
+      border-radius: 4px;
+    }
+
+    .caption {
+      font-size: 0.9rem;
+      color: #333;
+      font-family: "Caveat", cursive, sans-serif;
+      margin-top: 8px;
+    }
+
+    .quote {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #444;
+      margin: 0.5rem 0;
+      max-width: 90%;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      color: #666;
+      padding: 1rem;
+      text-align: center;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.6);
+      width: 100%;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="slider" id="slider">
+      <div class="slide">
+        <p class="quote">« Le bonheur se trouve dans les petites choses. »</p>
+        <div class="polaroid">
+          <img src="/Images/TommyUngerer_moi_troll.jpg" alt="Photo 1">
+          <p class="caption">Un souvenir, un instant, une lumière douce ✨</p>
+        </div>
+        <p class="quote">La douceur des instants simples 🌸</p>
+      </div>
+      <div class="slide">
+        <p class="quote">« Chaque jour est une nouvelle page. »</p>
+        <div class="polaroid">
+          <img src="/Images/Dolomites_sexy.jpg" alt="Photo 2">
+          <p class="caption">Un ciel pastel qui inspire la sérénité 💫</p>
+        </div>
+        <p class="quote">Savourer l’instant présent 🍃</p>
+      </div>
+      <div class="slide">
+        <p class="quote">« La beauté est partout autour de nous. »</p>
+        <div class="polaroid">
+          <img src="/Images/TommyUngerer_moi_troll.jpg" alt="Photo 3">
+          <p class="caption">Test</p>
+        </div>
+        <p class="quote">Capturer l’éphémère 📸</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Mon Album de Souvenirs · Créé avec douceur 🌿
+  </footer>
+
+  <script>
+    const slider = document.getElementById("slider");
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let index = 0;
+
+    let startTouchX = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let animationID;
+    let currentIndex = 0;
+
+    slider.addEventListener("touchstart", startTouch);
+    slider.addEventListener("touchend", endTouch);
+    slider.addEventListener("touchmove", moveTouch);
+
+    function startTouch(e) {
+      startTouchX = e.touches[0].clientX;
+      isDragging = true;
+      animationID = requestAnimationFrame(animation);
+    }
+
+    function moveTouch(e) {
+      if (!isDragging) return;
+      const currentX = e.touches[0].clientX;
+      currentTranslate = prevTranslate + currentX - startTouchX;
+    }
+
+    function endTouch() {
+      cancelAnimationFrame(animationID);
+      isDragging = false;
+      const movedBy = currentTranslate - prevTranslate;
+
+      if (movedBy < -100 && currentIndex < slider.children.length - 1) {
+        currentIndex += 1;
+      }
+      if (movedBy > 100 && currentIndex > 0) {
+        currentIndex -= 1;
+      }
+
+      setPositionByIndex();
+    }
+
+    function animation() {
+      setSliderPosition();
+      if (isDragging) requestAnimationFrame(animation);
+    }
+
+    function setSliderPosition() {
+      slider.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    function setPositionByIndex() {
+      currentTranslate = currentIndex * -window.innerWidth;
+      prevTranslate = currentTranslate;
+      slider.style.transition = "transform 0.3s ease";
+      setSliderPosition();
+      slider.addEventListener("transitionend", () => {
+        slider.style.transition = "none";
+      });
+    }
+  </script>
+</body>
+</html>
