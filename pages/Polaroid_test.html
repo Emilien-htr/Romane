@@ -123,14 +123,14 @@
 
         /* Style polaroid */
         .polaroid {
-            max-width: 90%;
+            max-width: 95%;
             width: 320px;
             background: white;
-            padding: 10px 10px 40px 10px;
+            padding: 10px 10px 10px 10px;
             /* plus d'espace en bas */
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             border-radius: 6px;
-            margin: 1.5rem 0;
+            margin: 1.2rem 0;
             text-align: center;
             touch-action: pan-y;
         }
@@ -149,11 +149,14 @@
         }
 
         .caption {
-            font-size: 0.8rem;
+            font-size: 1rem;
             color: #333;
-            font-family: "Caveat", cursive, sans-serif;
+            font-family: "Georgia", serif;
             /* écriture manuscrite */
-            margin-top: 8px;
+            min-height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
@@ -173,7 +176,7 @@
             <p class="caption" id="caption">Un souvenir, un instant, une lumière douce ✨</p>
         </div>
 
-        <p class="quote bottom" id="quoteBottom">Swipe pour découvrir d’autres souvenirs ➡️</p>
+        <p class="quote bottom" id="quoteBottom">⬅️Swipe pour découvrir d’autres souvenirs➡️</p>
     </main>
 
     <footer>© Mon Album de Souvenirs · Créé avec amour ❤️</footer>
@@ -181,26 +184,23 @@
     <script>
         const photos = [
             {
-                img: "../Images/Dolomites_sexy.jpg",
+                img: "../Images/Dolomites_sexy_moi.jpg",
                 top: "« Le bonheur se trouve dans les petites choses. »",
-                bottom: "Un souvenir, un instant, une lumière douce ✨",
-                caption: "Un souvenir, un instant, une lumière douce ✨"
-
+                caption: "Because I love you",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
-                img: "../Images/TommyUngerer_moi_troll.jpg",
+                img: "../Images/Dolomites_petite_pause.jpg",
                 top: "« Chaque jour est une nouvelle page à écrire. »",
-                bottom: "La douceur des instants simples 🌸",
-                caption: "siuuuu ✨"
+                caption: "siuuuu ✨",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 img: "../Images/Dolomites_sexy.jpg",
                 top: "« Chaque jour est une nouvelle page à écrire. »",
-                bottom: "La douceur des instants simples 🌸",
-                caption: "Sexy test"
-
+                caption: "Sexy test",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             }
-        ];
 
         let current = 0;
 
