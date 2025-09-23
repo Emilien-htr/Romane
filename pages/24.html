@@ -8,7 +8,7 @@
     <title>Album - Jour 3</title>
 
     <style>
-        .nav {
+        /* .nav {
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
@@ -28,7 +28,7 @@
 
         .nav.right {
             right: 10px;
-        }
+        } */
 
         body {
             margin: 0;
@@ -118,7 +118,7 @@
             display: block;
             border-radius: 4px;
             opacity: 1;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.4s ease;
             /* transition douce */
         }
 
@@ -144,8 +144,8 @@
 
     <main>
         <!-- /* Navigation flèches */  -->
-        <div class="nav left" onclick="prevPhoto()">&#10094;</div>
-        <div class="nav right" onclick="nextPhoto()">&#10095;</div>
+        <!-- <div class="nav left" onclick="prevPhoto()">&#10094;</div>
+        <div class="nav right" onclick="nextPhoto()">&#10095;</div> -->
 
         <p class="quote top" id="quoteTop">Aujourd'hui je t'emmène en Italie</p>
 
@@ -223,7 +223,7 @@
 
                 // Ré-affiche avec fade-in
                 photoContainer.classList.remove("fade-out");
-            }, 600); // durée de la transition
+            }, 400); // durée de la transition
         }
 
         // Gestion du swipe

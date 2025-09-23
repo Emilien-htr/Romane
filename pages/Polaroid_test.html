@@ -140,7 +140,7 @@
             display: block;
             border-radius: 4px;
             opacity: 1;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.4s ease;
             /* transition douce */
         }
 
@@ -201,6 +201,7 @@
                 caption: "Sexy test",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             }
+        ];
 
         let current = 0;
 
@@ -220,7 +221,7 @@
 
                 // Ré-affiche avec fade-in
                 photoContainer.classList.remove("fade-out");
-            }, 600); // durée de la transition
+            }, 400); // durée de la transition
         }
 
         // Gestion du swipe
