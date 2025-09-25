@@ -1,1 +1,298 @@
 <!-- jour 4 -->
+<!-- photos + videos -->
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <title>Album - Jour 4</title>
+
+    <style>
+        /* .nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            color: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .nav.left {
+            left: 10px;
+        }
+
+        .nav.right {
+            right: 10px;
+        } */
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Georgia", serif;
+            background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            width: 100%;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            /* Police manuscrite élégante */
+            font-size: 2rem;
+            color: #2d2d2d;
+            margin-bottom: 1rem;
+            margin-top: 1.6rem;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        /* My version */
+        .quote {
+            font-size: 1rem;
+            font-style: italic;
+            color: #444;
+            max-width: 95%;
+            /* margin: 0.5rem 0; */
+            /* margin-bottom: 1.5rem; */
+            /* margin: 1.4rem 0; */
+            margin: 0rem 0;
+        }
+
+        .text-frame {
+            max-width: 95%;
+            padding: 2rem;
+            padding-top: 0rem;
+            padding-bottom: 0rem;
+            text-align: left;
+            line-height: 1.4;
+            font-size: 1rem;
+            font-style: italic;
+            color: #444;
+            margin-top: -0.5rem;
+            /* margin: 0rem 0; */
+            margin-bottom: -1rem;
+        }
+
+        footer {
+            font-size: 0.85rem;
+            color: #666;
+            padding: 1rem;
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.6);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Style polaroid */
+        .polaroid {
+            max-width: 95%;
+            width: 320px;
+            background: white;
+            padding: 10px 10px 10px 10px;
+            /* plus d'espace en bas */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 6px;
+            margin: 1.2rem 0;
+            text-align: center;
+            touch-action: pan-y;
+        }
+
+        .polaroid img {
+            width: 100%;
+            display: block;
+            border-radius: 4px;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        .polaroid video {
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        /* .polaroid img,
+        .polaroid video {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        } */
+
+        .polaroid.fade-out img,
+        .polaroid.fade-out video {
+            opacity: 0;
+        }
+
+
+        .caption {
+            font-size: 1rem;
+            color: #333;
+            font-family: "Georgia", serif;
+            /* écriture manuscrite */
+            min-height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>❤️ Jour 4 ❤️ </h1>
+
+    <main>
+        <!-- /* Navigation flèches */  -->
+        <!-- <div class="nav left" onclick="prevPhoto()">&#10094;</div>
+        <div class="nav right" onclick="nextPhoto()">&#10095;</div> -->
+
+        <p class="quote top" id="quoteTop">Et si on retournait à Disney..</p>
+
+        <div class="polaroid" id="photoContainer">
+            <div id="mediaContainer"><img id="photo" src="../Images/Disney_kiss.jpg" alt="Photo du jour"></div>
+
+            <p class="caption" id="caption">Je peux pas m'empêcher de te faire des bisous</p>
+        </div>
+
+        <p class="quote bottom" id="quoteBottom">⬅️Swipe pour découvrir d’autres souvenirs➡️</p>
+    </main>
+
+    <footer>© Mon Album de Souvenirs · Créé avec amour ❤️</footer>
+
+    <script>
+        const photos = [
+            {
+                type: "img",
+                src: "../Images/Disney_kiss.jpg",
+                top: "Et si on retournait à Disney..",
+                caption: "Je peux pas m'empêcher de te faire des bisous",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "video",
+                src: "../Images/Disney_spin.mp4",
+                top: "Je me sens si léger avec toi",
+                caption: "Même si les attractions me retournent le ventre",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Disney_emotions.jpg",
+                top: "Toujours à faire des bêtises",
+                caption: "Je retrouve mon âme d'enfant avec toi",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Disney_cars.jpg",
+                top: "",
+                caption: "J'étais trop ému de voir cars",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Disney_chapeau.jpg",
+                top: "",
+                caption: "J'ai eu la chance d'essayer un beau chapeau",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Disney_animals.jpg",
+                top: "Ces deux jours étaient magique, remplis d'émotions, d'amour et de fatigue",
+                caption: "J'ai adoré pouvoir faire ce parc avec toi",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Disney_chateau.jpg",
+                top: "Quels seraient le prochain parc qu'on ferait ?",
+                caption: "Je t'aime mon chou",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            }
+        ];
+
+        let current = 0;
+
+        function updatePhoto() {
+            const photoContainer = document.getElementById("photoContainer");
+            const mediaContainer = document.getElementById("mediaContainer");
+
+            photoContainer.classList.add("fade-out");
+
+            setTimeout(() => {
+                // Génère soit une image soit une vidéo
+                if (photos[current].type === "img") {
+                    mediaContainer.innerHTML = `<img src="${photos[current].src}" alt="Souvenir">`;
+                } else if (photos[current].type === "video") {
+                    mediaContainer.innerHTML = `
+                        <video controls autoplay muted loop>
+                            <source src="${photos[current].src}" type="video/mp4">
+                            Ton navigateur ne supporte pas la vidéo.
+                        </video>
+                    `;
+                }
+
+                document.getElementById("quoteTop").textContent = photos[current].top;
+                document.getElementById("quoteBottom").textContent = photos[current].bottom;
+                document.getElementById("caption").textContent = photos[current].caption;
+
+                photoContainer.classList.remove("fade-out");
+            }, 400);
+        }
+
+        // Gestion du swipe
+        const photoContainer = document.getElementById("photoContainer");
+        let startX = 0;
+
+        photoContainer.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        photoContainer.addEventListener("touchend", (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+
+            if (Math.abs(diff) > 50) { // seuil de swipe
+                if (diff > 0) {
+                    // swipe gauche → photo suivante
+                    current = (current + 1) % photos.length;
+                } else {
+                    // swipe droite → photo précédente
+                    current = (current - 1 + photos.length) % photos.length;
+                }
+                updatePhoto();
+            }
+        });
+
+        // Navigation flèches
+        function prevPhoto() {
+            current = (current - 1 + photos.length) % photos.length;
+            updatePhoto();
+        }
+
+        function nextPhoto() {
+            current = (current + 1) % photos.length;
+            updatePhoto();
+        }
+    </script>
+</body>
+
+</html>
