@@ -1,5 +1,5 @@
 <!-- jour 6 -->
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -23,7 +23,6 @@
 
         h1 {
             font-family: 'Great Vibes', cursive;
-            /* Police manuscrite élégante */
             font-size: 2rem;
             color: #2d2d2d;
             margin-bottom: 1rem;
@@ -36,7 +35,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 1rem;
+            /* padding: 1rem; */
         }
 
         .quote {
@@ -44,29 +43,22 @@
             font-style: italic;
             color: #444;
             max-width: 95%;
-            /* margin: 0.5rem 0; */
-            /* margin-bottom: 1.5rem; */
-            /* margin: 1.4rem 0; */
-            margin: 0rem 0;
+            margin: 0.5rem 0;
         }
 
         .text-frame {
-            max-width: 95%;
-            padding: 2rem;
-            padding-top: 0rem;
-            padding-bottom: 0rem;
+            max-width: 90%;
+            padding: 1rem;
             text-align: left;
-            line-height: 1.4;
+            line-height: 1.5;
             font-size: 1rem;
             font-style: italic;
             color: #444;
-            margin-top: -0.5rem;
-            /* margin: 0rem 0; */
-            margin-bottom: -1rem;
+            margin-top: -2rem;
         }
 
         .photo-frame {
-            max-width: 60%;
+            max-width: 45%;
             width: 350px;
             border-radius: 10px;
             overflow: hidden;
@@ -79,6 +71,20 @@
             display: block;
         }
 
+        .hidden {
+            display: none;
+        }
+
+        /* Transition fade commune */
+        .fade {
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        .fade.hidden-transition {
+            opacity: 0;
+        }
+
         footer {
             font-size: 0.85rem;
             color: #666;
@@ -89,6 +95,29 @@
             width: 100%;
             box-sizing: border-box;
         }
+
+        /* Navigation flèches */
+        .nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            color: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .nav.left {
+            left: 10px;
+        }
+
+        .nav.right {
+            right: 10px;
+        }
     </style>
 </head>
 
@@ -96,33 +125,122 @@
     <h1>❤️ Jour 6 ❤️ </h1>
 
     <main>
+        <div class="nav left" onclick="prevPhoto()">&#10094;</div>
+        <div class="nav right" onclick="nextPhoto()">&#10095;</div>
 
-        <p class="quote">Un bon petit spa avec toi c'est toujours un bon moment </p>
+        <p class="quote top" id="quoteTop"></p>
 
-        <div class="photo-frame">
-            <img src="../Images/Chenaudière.jpg" alt="Photo du jour">
+        <!-- Conteneur photo -->
+        <div class="photo-frame fade" id="photoContainer">
+            <img id="photo" src="" alt="">
         </div>
 
-        <!-- <p class="quote">Une petite photo pour ton premier jour aux Etats-Unis</p> -->
+        <!-- Conteneur texte -->
+        <div class="text-frame fade hidden" id="textContainer"></div>
 
-        <div class="text-frame">
-            <p>
-                Je cherche à me réchauffer comme je peux et penser à passer du temps avec toi dans un spa est plutôt pas mal. </p>
-            <p>
-                Toi aussi tu es plutôt pas mal 😉<br>
-                Je dirais même la plus belle du monde, pour tout ce que tu es. <br>
-                Tu as un sourire à tomber par terre, des yeux magnifiques, une personnalité en or et un cœur sans fin. 
-                Tu me fais sourire, tu me fais fondre et chaque fois que je te vois c'est le coup de foudre <br>
-                Evidemment je n'oublierai pas ton corps de rêve et tes courbes parfaites qui me rendent fou. <br>
-                Je t'aime de tout mon cœur ❤️
-            </p>
-        </div>
-
+        <p class="quote bottom" id="quoteBottom"></p>
     </main>
 
     <footer>
         © Mon Album de Souvenirs · Créé avec amour ❤️
     </footer>
+
+    <script>
+        const slides = [
+            {
+                type: "image",
+                src: "../Images/Chenaudière.jpg",
+                top: "Un bon petit spa avec toi c'est toujours un bon moment",
+                bottom: "⬅️ Swipe ➡️ "
+            },
+            {
+                type: "text",
+                content: `<p> Je cherche à me réchauffer comme je peux et penser à passer du temps avec toi dans un spa est plutôt pas mal. </p>
+                <p>
+                    Toi aussi tu es plutôt pas mal 😉<br>
+                    Je dirais même la plus belle du monde, pour tout ce que tu es. 
+                </p>
+                <p>
+                    Tu as un sourire à tomber par terre, des yeux magnifiques, une personnalité en or et un cœur sans fin. 
+                    Tu me fais sourire, tu me fais fondre et chaque fois que je te vois c'est le coup de foudre </p>
+                <p>
+                    Je crois que ce qui me manque le plus c'est ta chaleur. Cette chaleur que tu émane naturellement par ta présence, ta joie de vivre, ton amour. <br>
+                    Ta chaleur humaine qui me réchauffe le cœur et l'âme. La chaleur de ton corps quand je te prends dans mes bras. Ta présence qui réchauffe mes journées et mes nuits.<br>
+                    Tu me manques et j'ai qu'une hâte, te serrer dans mes bras et ne plus te lâcher. </p>
+                <p>
+                    Je t'aime de tout mon cœur ❤️</²p>`,
+                top: "",
+                bottom: "⬅️ Swipe ➡️"
+            }
+        ];
+
+        let current = 0;
+
+        function updateSlide() {
+            const photoContainer = document.getElementById("photoContainer");
+            const textContainer = document.getElementById("textContainer");
+            const photo = document.getElementById("photo");
+
+            const slide = slides[current];
+
+            // fade out
+            photoContainer.classList.add("hidden-transition");
+            textContainer.classList.add("hidden-transition");
+
+            setTimeout(() => {
+                // Mise à jour des citations
+                document.getElementById("quoteTop").textContent = slide.top || "";
+                document.getElementById("quoteBottom").textContent = slide.bottom || "";
+
+                if (slide.type === "image") {
+                    photo.src = slide.src;
+                    photoContainer.classList.remove("hidden");
+                    textContainer.classList.add("hidden");
+                } else if (slide.type === "text") {
+                    textContainer.innerHTML = slide.content;
+                    textContainer.classList.remove("hidden");
+                    photoContainer.classList.add("hidden");
+                }
+
+                // fade in
+                photoContainer.classList.remove("hidden-transition");
+                textContainer.classList.remove("hidden-transition");
+            }, 400); // temps de fade out
+        }
+
+        // Swipe
+        let startX = 0;
+        document.querySelector("main").addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        document.querySelector("main").addEventListener("touchend", (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    current = (current + 1) % slides.length;
+                } else {
+                    current = (current - 1 + slides.length) % slides.length;
+                }
+                updateSlide();
+            }
+        });
+
+        // Premier affichage
+        updateSlide();
+
+        function prevPhoto() {
+            current = (current - 1 + slides.length) % slides.length;
+            updateSlide();
+        }
+
+        function nextPhoto() {
+            current = (current + 1) % slides.length;
+            updateSlide();
+        }
+    </script>
 </body>
 
 </html>

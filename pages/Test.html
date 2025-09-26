@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Album Polaroid Slide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <title>Album - Jour 6</title>
+
   <style>
     body {
       margin: 0;
@@ -12,69 +15,73 @@
       background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
       display: flex;
       flex-direction: column;
-      align-items: center;
       min-height: 100vh;
+      width: 100%;
       text-align: center;
-      overflow: hidden;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2rem;
+      color: #2d2d2d;
+      margin-bottom: 1rem;
+      margin-top: 1.6rem;
     }
 
     main {
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .slider {
-      display: flex;
-      transition: transform 0.3s ease;
-      will-change: transform;
-      touch-action: pan-y;
-    }
-
-    .slide {
-      min-width: 100%;
-      display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-    }
-
-    /* Style polaroid */
-    .polaroid {
-      max-width: 90%;
-      width: 320px;
-      background: white;
-      padding: 10px 10px 40px 10px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      border-radius: 6px;
-      margin: 1rem 0;
-      text-align: center;
-    }
-
-    .polaroid img {
-      width: 100%;
-      display: block;
-      border-radius: 4px;
-    }
-
-    .caption {
-      font-size: 0.9rem;
-      color: #333;
-      font-family: "Caveat", cursive, sans-serif;
-      margin-top: 8px;
+      padding: 1rem;
     }
 
     .quote {
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-style: italic;
       color: #444;
+      max-width: 95%;
       margin: 0.5rem 0;
+    }
+
+    .text-frame {
       max-width: 90%;
+      padding: 1rem;
+      text-align: left;
+      line-height: 1.5;
+      font-size: 1rem;
+      font-style: italic;
+      color: #444;
+    }
+
+    .photo-frame {
+      max-width: 60%;
+      width: 350px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      margin: 1rem 0;
+      /* transition: opacity 0.4s ease; */
+    }
+
+    .photo-frame img {
+      width: 100%;
+      display: block;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Transition fade commune */
+    .fade {
+      opacity: 1;
+      transition: opacity 0.4s ease;
+    }
+
+    .fade.hidden-transition {
+      opacity: 0;
     }
 
     footer {
@@ -82,109 +89,146 @@
       color: #666;
       padding: 1rem;
       text-align: center;
-      border-top: 1px solid rgba(0,0,0,0.1);
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
       background: rgba(255, 255, 255, 0.6);
       width: 100%;
       box-sizing: border-box;
     }
+
+    /* Navigation flèches */
+    .nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2.5rem;
+      color: rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .nav.left {
+      left: 10px;
+    }
+
+    .nav.right {
+      right: 10px;
+    }
   </style>
 </head>
+
 <body>
+  <h1>❤️ Jour 6 ❤️ </h1>
+
   <main>
-    <div class="slider" id="slider">
-      <div class="slide">
-        <p class="quote">« Le bonheur se trouve dans les petites choses. »</p>
-        <div class="polaroid">
-          <img src="../Images/TommyUngerer_moi_troll.jpg" alt="Photo 1">
-          <p class="caption">Un souvenir, un instant, une lumière douce ✨</p>
-        </div>
-        <p class="quote">La douceur des instants simples 🌸</p>
-      </div>
-      <div class="slide">
-        <p class="quote">« Chaque jour est une nouvelle page. »</p>
-        <div class="polaroid">
-          <img src="../Images/Dolomites_sexy.jpg" alt="Photo 2">
-          <p class="caption">Un ciel pastel qui inspire la sérénité 💫</p>
-        </div>
-        <p class="quote">Savourer l’instant présent 🍃</p>
-      </div>
-      <div class="slide">
-        <p class="quote">« La beauté est partout autour de nous. »</p>
-        <div class="polaroid">
-          <img src="../Images/TommyUngerer_moi_troll.jpg" alt="Photo 3">
-          <p class="caption">Test</p>
-        </div>
-        <p class="quote">Capturer l’éphémère 📸</p>
-      </div>
+    <div class="nav left" onclick="prevPhoto()">&#10094;</div>
+    <div class="nav right" onclick="nextPhoto()">&#10095;</div>
+
+    <p class="quote top" id="quoteTop"></p>
+
+    <!-- Conteneur photo -->
+    <div class="photo-frame" id="photoContainer">
+      <img id="photo" src="" alt="">
     </div>
+
+    <!-- Conteneur texte -->
+    <div class="text-frame hidden" id="textContainer"></div>
+
+    <p class="quote bottom" id="quoteBottom"></p>
   </main>
 
   <footer>
-    © 2025 Mon Album de Souvenirs · Créé avec douceur 🌿
+    © Mon Album de Souvenirs · Créé avec amour ❤️
   </footer>
 
   <script>
-    const slider = document.getElementById("slider");
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-    let index = 0;
-
-    let startTouchX = 0;
-    let currentTranslate = 0;
-    let prevTranslate = 0;
-    let animationID;
-    let currentIndex = 0;
-
-    slider.addEventListener("touchstart", startTouch);
-    slider.addEventListener("touchend", endTouch);
-    slider.addEventListener("touchmove", moveTouch);
-
-    function startTouch(e) {
-      startTouchX = e.touches[0].clientX;
-      isDragging = true;
-      animationID = requestAnimationFrame(animation);
-    }
-
-    function moveTouch(e) {
-      if (!isDragging) return;
-      const currentX = e.touches[0].clientX;
-      currentTranslate = prevTranslate + currentX - startTouchX;
-    }
-
-    function endTouch() {
-      cancelAnimationFrame(animationID);
-      isDragging = false;
-      const movedBy = currentTranslate - prevTranslate;
-
-      if (movedBy < -100 && currentIndex < slider.children.length - 1) {
-        currentIndex += 1;
+    const slides = [
+      {
+        type: "image",
+        src: "../Images/Chenaudière.jpg",
+        top: "Un bon petit spa avec toi c'est toujours un bon moment",
+        bottom: "⬅️ Swipe ➡️ "
+      },
+      {
+        type: "text",
+        content: `Je cherche à me réchauffer comme je peux et penser à passer du temps avec toi dans un spa est plutôt pas mal.<br><br>
+                  Toi aussi tu es plutôt pas mal 😉 Je dirais même la plus belle du monde ❤️`,
+        top: "« Chaque jour est une nouvelle page à écrire. »",
+        bottom: "⬅️ Swipe ➡️"
       }
-      if (movedBy > 100 && currentIndex > 0) {
-        currentIndex -= 1;
+    ];
+
+    let current = 0;
+
+function updateSlide() {
+      const photoContainer = document.getElementById("photoContainer");
+      const textContainer = document.getElementById("textContainer");
+      const photo = document.getElementById("photo");
+
+      const slide = slides[current];
+
+      // fade out
+      photoContainer.classList.add("hidden-transition");
+      textContainer.classList.add("hidden-transition");
+
+      setTimeout(() => {
+        // Mise à jour des citations
+        document.getElementById("quoteTop").textContent = slide.top || "";
+        document.getElementById("quoteBottom").textContent = slide.bottom || "";
+
+        if (slide.type === "image") {
+          photo.src = slide.src;
+          photoContainer.classList.remove("hidden");
+          textContainer.classList.add("hidden");
+        } else if (slide.type === "text") {
+          textContainer.innerHTML = slide.content;
+          textContainer.classList.remove("hidden");
+          photoContainer.classList.add("hidden");
+        }
+
+        // fade in
+        photoContainer.classList.remove("hidden-transition");
+        textContainer.classList.remove("hidden-transition");
+      }, 400); // temps de fade out
+    }
+
+    // Swipe
+    let startX = 0;
+    document.querySelector("main").addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    document.querySelector("main").addEventListener("touchend", (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          current = (current + 1) % slides.length;
+        } else {
+          current = (current - 1 + slides.length) % slides.length;
+        }
+        updateSlide();
       }
+    });
 
-      setPositionByIndex();
+    // Premier affichage
+    updateSlide();
+
+
+    function prevPhoto() {
+      current = (current - 1 + slides.length) % slides.length;
+      updateSlide();
     }
 
-    function animation() {
-      setSliderPosition();
-      if (isDragging) requestAnimationFrame(animation);
-    }
-
-    function setSliderPosition() {
-      slider.style.transform = `translateX(${currentTranslate}px)`;
-    }
-
-    function setPositionByIndex() {
-      currentTranslate = currentIndex * -window.innerWidth;
-      prevTranslate = currentTranslate;
-      slider.style.transition = "transform 0.3s ease";
-      setSliderPosition();
-      slider.addEventListener("transitionend", () => {
-        slider.style.transition = "none";
-      });
+    function nextPhoto() {
+      current = (current + 1) % slides.length;
+      updateSlide();
     }
   </script>
 </body>
+
 </html>
