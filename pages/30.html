@@ -1,2 +1,198 @@
 <!-- jour 9 -->
-<!-- Linkin Park -->
+<!-- Découvertes + Linkin Park -->
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <title>Album - Jour 9</title>
+
+    <link rel="stylesheet" href="../styles/nav_fleches.css">
+    <link rel="stylesheet" href="../styles/polaroid.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+</head>
+
+<body>
+    <h1>❤️ Jour 9 ❤️ </h1>
+
+    <main>
+        <!-- /* Navigation flèches */  -->
+        <!-- <div class="nav left" onclick="prevPhoto()">&#10094;</div>
+        <div class="nav right" onclick="nextPhoto()">&#10095;</div> -->
+        <!-- A enlever avant de publier -->
+
+        <p class="quote top" id="quoteTop"></p>
+
+        <div class="polaroid" id="photoContainer">
+            <!-- <div id="mediaContainer"><img id="photo" src="../Images/Lalique_papilons.jpg" alt="Photo du jour"></div> -->
+            <div id="mediaContainer"></div>
+
+            <p class="caption" id="caption"></p>
+        </div>
+
+        <p class="quote bottom" id="quoteBottom">⬅️Swipe pour découvrir d’autres souvenirs➡️</p>
+    </main>
+
+    <footer>© Mon Album de Souvenirs · Créé avec amour ❤️</footer>
+
+    <script>
+        updatePhoto();
+
+        const photos = [
+            {
+                type: "img",
+                src: "../Images/Porsche_escalator_us.jpg",
+                top: "Grâce à toi j'ai pu tester plein de nouvelles choses et découvrir plein de nouvelles passions",
+                caption: "Les musées..",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Porsche_winner_moi.jpg",
+                top: "",
+                caption: "Un rêve pour moi ce musée Porsche",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Porsche_drivers.jpg",
+                top: "",
+                caption: "Comment je nous imagine plus tard, au volant d'un bolide",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Escape_prison.jpg",
+                top: "Ma première expérience d'escape game",
+                caption: "Et il faut qu'un idiot perde la clé",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Escape_espace.jpg",
+                top: "Avec tous mes potes",
+                caption: "Il pouvait pas se taire un peu",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/EscapeGame_404.jpg",
+                top: "J'ai hâte d'en refaire avec toi",
+                caption: "Même tous les deux on est imbattables",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/LinkinPark_billets.jpg",
+                top: "Les concerts!!",
+                caption: "Dire que ça a été mon premier concert de toute ma vie",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/LinkinPark_story.jpg",
+                top: "",
+                caption: "Je n'ai rien de plus à ajouter",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_rando_us_milieu.jpg",
+                top: "Les voyages et les randos. Je veux te suivre partout maintenant",
+                caption: "Je n'ai jamais autant voyagé qu'avec toi",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/accrobranche_picnic.jpg",
+                top: "Je veux refaire de l'accrobranche",
+                caption: "Je crois qu'on a un petit faible pour les pique-niques aussi",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/badminton_world.jpg",
+                top: "On a vu une compétition de badminton 🥹",
+                caption: "C'était impressionant",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Tripsdrill_voiture.jpg",
+                top: "J'ai même testé les parcs d'attractions",
+                caption: "Et j'ai pas vomi !",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/picnic.jpg",
+                top: "Merci pour toutes ces découvertes et aventures",
+                caption: "Je crois que ce que je préfère dans tout ça reste de t'emmener en date et te voir sourire",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            }
+        ];
+
+        let current = 0;
+
+        function updatePhoto() {
+            const photoContainer = document.getElementById("photoContainer");
+            const mediaContainer = document.getElementById("mediaContainer");
+
+            photoContainer.classList.add("fade-out");
+
+            setTimeout(() => {
+                // Génère soit une image soit une vidéo
+                if (photos[current].type === "img") {
+                    mediaContainer.innerHTML = `<img src="${photos[current].src}" alt="Souvenir">`;
+                } else if (photos[current].type === "video") {
+                    mediaContainer.innerHTML = `
+                        <video controls autoplay muted loop>
+                            <source src="${photos[current].src}" type="video/mp4">
+                            Ton navigateur ne supporte pas la vidéo.
+                        </video>
+                    `;
+                }
+
+                document.getElementById("quoteTop").textContent = photos[current].top;
+                document.getElementById("quoteBottom").textContent = photos[current].bottom;
+                document.getElementById("caption").textContent = photos[current].caption;
+
+                photoContainer.classList.remove("fade-out");
+            }, 400);
+        }
+
+
+
+        // Gestion du swipe
+        const photoContainer = document.getElementById("photoContainer");
+        let startX = 0;
+
+        photoContainer.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        photoContainer.addEventListener("touchend", (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+
+            if (Math.abs(diff) > 50) { // seuil de swipe
+                if (diff > 0) {
+                    // swipe gauche → photo suivante
+                    current = (current + 1) % photos.length;
+                } else {
+                    // swipe droite → photo précédente
+                    current = (current - 1 + photos.length) % photos.length;
+                }
+                updatePhoto();
+            }
+        });
+    </script>
+
+    <script type="text/javascript" src="../scripts/nav_fleches.js"></script>
+
+</body>
+
+</html>

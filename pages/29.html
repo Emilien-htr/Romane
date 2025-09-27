@@ -1,2 +1,198 @@
 <!-- jour 8 -->
- <!-- Neuschwanstein -->
+<!-- Paris / Versailles -->
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <title>Album - Jour 8</title>
+
+    <link rel="stylesheet" href="../styles/nav_fleches.css">
+    <link rel="stylesheet" href="../styles/polaroid.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+</head>
+
+<body>
+    <h1>❤️ Jour 8 ❤️ </h1>
+
+    <main>
+        <!-- /* Navigation flèches */  -->
+        <!-- <div class="nav left" onclick="prevPhoto()">&#10094;</div>
+        <div class="nav right" onclick="nextPhoto()">&#10095;</div> -->
+        <!-- A enlever avant de publier -->
+
+        <p class="quote top" id="quoteTop"></p>
+
+        <div class="polaroid" id="photoContainer">
+            <!-- <div id="mediaContainer"><img id="photo" src="../Images/Lalique_papilons.jpg" alt="Photo du jour"></div> -->
+            <div id="mediaContainer"></div>
+
+            <p class="caption" id="caption"></p>
+        </div>
+
+        <p class="quote bottom" id="quoteBottom">⬅️Swipe pour découvrir d’autres souvenirs➡️</p>
+    </main>
+
+    <footer>© Mon Album de Souvenirs · Créé avec amour ❤️</footer>
+
+    <script>
+        updatePhoto();
+
+        const photos = [
+            {
+                type: "img",
+                src: "../Images/paris_wallpaper.jpg",
+                top: "Aujourd'hui nous allons faire un tour de toutes les choses que nous avons pu faire à Paris",
+                caption: "Oui je la remets encore",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Paris_arche_louvre_beaute.jpg",
+                top: "On y a passé plusieurs journées, bien que je n'étais pas le plus motivé",
+                caption: "Je me rappelle avoir fait le tour des monuments parisien avec toi",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Brunch_Paris_moi.jpg",
+                top: "Tu m'as emmené faire un brunch délicieux",
+                caption: "Et évidemment tu me prends en photo",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Louvre_statue2.jpg",
+                top: "Puis on est allé au Louvre",
+                caption: "On a vu la Joconde !!! Mais c'était pas le plus joli",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Marché_Noel_Paris.jpg",
+                top: "On a aussi fait un marché de Noël",
+                caption: "Ils sont clairement mieux à Strasbourg",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Musee_histoire_naturelle.jpg",
+                top: "On a fait plein de musées",
+                caption: "Les dizonaures",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Musée_arts_metiers.jpg",
+                top: "",
+                caption: "Et le plus long musée au monde 😭",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Musée_arts_metiers_moi.jpg",
+                top: "",
+                caption: "Heureusement que tu as trouvé la plus belle oeuvre d'art 😘 ",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Paris_tour_eiffel.jpg",
+                top: "On a vu la Tour Eiffel sous tous ses angles",
+                caption: "On aurait dit que c'était Halloween",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Paris_trocadero_us.jpg",
+                top: "",
+                caption: "On a fait les parisiens pour ton école ",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Versailles_marche.jpg",
+                top: "Mais on est aussi allé à Versailles",
+                caption: "Une petite marche dans le parc",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Versailles_intérieur.jpg",
+                top: "",
+                caption: "Un chateau magnifique tant à l'intérieur .. ",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Versailles_love_eyes.jpg",
+                top: "Qu'à l'extérieur",
+                caption: "Mais comme toujours je n'ai d'yeux que pour toi ❤️",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            }
+        ];
+
+        let current = 0;
+
+        function updatePhoto() {
+            const photoContainer = document.getElementById("photoContainer");
+            const mediaContainer = document.getElementById("mediaContainer");
+
+            photoContainer.classList.add("fade-out");
+
+            setTimeout(() => {
+                // Génère soit une image soit une vidéo
+                if (photos[current].type === "img") {
+                    mediaContainer.innerHTML = `<img src="${photos[current].src}" alt="Souvenir">`;
+                } else if (photos[current].type === "video") {
+                    mediaContainer.innerHTML = `
+                        <video controls autoplay muted loop>
+                            <source src="${photos[current].src}" type="video/mp4">
+                            Ton navigateur ne supporte pas la vidéo.
+                        </video>
+                    `;
+                }
+
+                document.getElementById("quoteTop").textContent = photos[current].top;
+                document.getElementById("quoteBottom").textContent = photos[current].bottom;
+                document.getElementById("caption").textContent = photos[current].caption;
+
+                photoContainer.classList.remove("fade-out");
+            }, 400);
+        }
+
+
+
+        // Gestion du swipe
+        const photoContainer = document.getElementById("photoContainer");
+        let startX = 0;
+
+        photoContainer.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        photoContainer.addEventListener("touchend", (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+
+            if (Math.abs(diff) > 50) { // seuil de swipe
+                if (diff > 0) {
+                    // swipe gauche → photo suivante
+                    current = (current + 1) % photos.length;
+                } else {
+                    // swipe droite → photo précédente
+                    current = (current - 1 + photos.length) % photos.length;
+                }
+                updatePhoto();
+            }
+        });
+    </script>
+
+    <script type="text/javascript" src="../scripts/nav_fleches.js"></script>
+
+</body>
+
+</html>

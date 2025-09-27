@@ -1,245 +1,264 @@
+<!-- quizz -->
+
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-    <title>Album - Jour 6</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💖 Quizz d'Amour 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Georgia", serif;
-            background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            width: 100%;
-            text-align: center;
-        }
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Georgia", serif;
+      background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      text-align: center;
+    }
 
-        h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2rem;
-            color: #2d2d2d;
-            margin-bottom: 1rem;
-            margin-top: 1.6rem;
-        }
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.4rem;
+      color: #2d2d2d;
+      margin: 1.5rem 0;
+    }
 
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            /* padding: 1rem; */
-        }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
 
-        .quote {
-            font-size: 1rem;
-            font-style: italic;
-            color: #444;
-            max-width: 95%;
-            margin: 0.5rem 0;
-        }
+    .question-box {
+      max-width: 600px;
+      background: rgba(255,255,255,0.8);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
 
-        .text-frame {
-            max-width: 90%;
-            padding: 1rem;
-            text-align: left;
-            line-height: 1.5;
-            font-size: 1rem;
-            font-style: italic;
-            color: #444;
-            margin-top: -2rem;
-        }
+    .question-box.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-        .photo-frame {
-            max-width: 45%;
-            width: 350px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            margin: 1rem 0;
-        }
+    .question {
+      font-size: 1.3rem;
+      font-style: italic;
+      margin-bottom: 1rem;
+      color: #444;
+    }
 
-        .photo-frame img {
-            width: 100%;
-            display: block;
-        }
+    .options {
+      text-align: left;
+      margin-bottom: 1rem;
+    }
 
-        .hidden {
-            display: none;
-        }
+    .options label {
+      display: block;
+      margin: 0.5rem 0;
+      cursor: pointer;
+    }
 
-        /* Transition fade commune */
-        .fade {
-            opacity: 1;
-            transition: opacity 0.4s ease;
-        }
+    .answer {
+      font-size: 1rem;
+      color: #333;
+      margin-top: 0.8rem;
+      font-style: italic;
+    }
 
-        .fade.hidden-transition {
-            opacity: 0;
-        }
+    button {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #f2e0d0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s, background 0.2s;
+      margin-top: 0.5rem;
+    }
 
-        footer {
-            font-size: 0.85rem;
-            color: #666;
-            padding: 1rem;
-            text-align: center;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            background: rgba(255, 255, 255, 0.6);
-            width: 100%;
-            box-sizing: border-box;
-        }
+    button:hover {
+      transform: scale(1.05);
+      background: #e6cbb7;
+    }
 
-        /* Navigation flèches */
-        .nav {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2.5rem;
-            color: rgba(0, 0, 0, 0.5);
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            user-select: none;
-            transition: background 0.2s, transform 0.2s;
-        }
+    .result {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        .nav.left {
-            left: 10px;
-        }
+    .result img {
+      max-width: 80%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
 
-        .nav.right {
-            right: 10px;
-        }
-    </style>
+    footer {
+      font-size: 0.85rem;
+      color: #666;
+      padding: 1rem;
+      text-align: center;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.6);
+      width: 100%;
+      box-sizing: border-box;
+    }
+  </style>
 </head>
-
 <body>
-    <h1>❤️ Jour 6 ❤️ </h1>
+  <h1>💖 Quizz d'Amour 💖</h1>
 
-    <main>
-        <div class="nav left" onclick="prevPhoto()">&#10094;</div>
-        <div class="nav right" onclick="nextPhoto()">&#10095;</div>
+  <main>
+    <!-- Conteneur quiz -->
+    <div id="quizContainer" class="question-box">
+      <p class="question" id="question"></p>
+      <div class="options" id="options"></div>
+      <button id="validateBtn" onclick="validateAnswer()">Valider</button>
+      <p class="answer" id="answer"></p>
+    </div>
 
-        <p class="quote top" id="quoteTop"></p>
+    <!-- Résultat final -->
+    <div class="result" id="result">
+      <img src="../Images/merci.jpg" alt="Merci">
+      <p>Merci d’avoir joué à ce petit quizz 💕 <br>
+      Peu importe les réponses, la vérité est simple : <br>
+      Je t’aime de tout mon cœur ❤️</p>
+    </div>
+  </main>
 
-        <!-- Conteneur photo -->
-        <div class="photo-frame fade" id="photoContainer">
-            <img id="photo" src="" alt="">
-        </div>
+  <footer>
+    © Mon Album de Souvenirs · Créé avec amour ❤️
+  </footer>
 
-        <!-- Conteneur texte -->
-        <div class="text-frame fade hidden" id="textContainer"></div>
+  <script>
+    // Tableau des questions à choix multiples
+    const questions = [
+      {
+        q: "Où était notre premier baiser ?",
+        options: ["Dans la rue", "Dans un parc", "Au cinéma", "Chez toi"],
+        correct: 1,
+        feedback: "C’était bien dans le parc 🌳, un souvenir magique ❤️"
+      },
+      {
+        q: "Qui est le plus amoureux ?",
+        options: ["Toi", "Moi"],
+        correct: 0,
+        feedback: "Toi sans hésiter... mais moi je t’aime encore plus 😍"
+      },
+      {
+        q: "Qui est le plus gourmand ?",
+        options: ["Toi", "Moi"],
+        correct: 1,
+        feedback: "C’est moi 🍫... mais j’adore partager avec toi !"
+      },
+      {
+        q: "Quel est notre pays de rêve à visiter ensemble ?",
+        options: ["Italie", "Japon", "Islande", "Canada"],
+        correct: 2,
+        feedback: "L’Islande ❄️, on ira voir les aurores boréales ensemble 🌌"
+      },
+      {
+        q: "Qui est le plus câlin ?",
+        options: ["Toi", "Moi"],
+        correct: 0,
+        feedback: "Toi 💕... mais je ne me lasse jamais de tes câlins 🥰"
+      },
+      {
+        q: "Quel est notre plat préféré à deux ?",
+        options: ["Pizza", "Sushi", "Raclette", "Pâtes"],
+        correct: 2,
+        feedback: "La raclette 🧀, parfaite pour se coller l’hiver ❄️"
+      },
+      {
+        q: "Qui est le plus romantique ?",
+        options: ["Toi", "Moi"],
+        correct: 1,
+        feedback: "C’est moi 💌, mais c’est facile avec toi ✨"
+      },
+      {
+        q: "Quelle est la chanson qui nous représente ?",
+        options: ["Perfect – Ed Sheeran", "All of Me – John Legend", "La Vie en Rose – Piaf", "Shallow – Lady Gaga"],
+        correct: 0,
+        feedback: "Perfect 🎶... comme toi 💕"
+      },
+      {
+        q: "Qui a dit 'je t’aime' en premier ?",
+        options: ["Toi", "Moi"],
+        correct: 0,
+        feedback: "Toi... le plus beau moment de ma vie ❤️"
+      },
+      {
+        q: "Quel est notre rêve commun ?",
+        options: ["Avoir une maison", "Voyager", "Un chien", "Tout ça à la fois"],
+        correct: 3,
+        feedback: "Tout ça à la fois 🏡🐶✈️... avec toi c’est certain 💕"
+      }
+    ];
 
-        <p class="quote bottom" id="quoteBottom"></p>
-    </main>
+    let current = 0;
 
-    <footer>
-        © Mon Album de Souvenirs · Créé avec amour ❤️
-    </footer>
+    function showQuestion() {
+      if (current < questions.length) {
+        const box = document.getElementById("quizContainer");
+        box.classList.remove("active"); // cache transition
+        setTimeout(() => {
+          document.getElementById("question").textContent = questions[current].q;
+          const optionsDiv = document.getElementById("options");
+          optionsDiv.innerHTML = "";
+          questions[current].options.forEach((opt, i) => {
+            optionsDiv.innerHTML += `
+              <label>
+                <input type="radio" name="option" value="${i}"> ${opt}
+              </label>
+            `;
+          });
+          document.getElementById("answer").textContent = "";
+          document.getElementById("validateBtn").disabled = false;
+          setTimeout(() => box.classList.add("active"), 50); // réaffiche
+        }, 300);
+      } else {
+        document.getElementById("quizContainer").style.display = "none";
+        document.getElementById("result").style.display = "flex";
+      }
+    }
 
-    <script>
-        const slides = [
-            {
-                type: "image",
-                src: "../Images/Chenaudière.jpg",
-                top: "Un bon petit spa avec toi c'est toujours un bon moment",
-                bottom: "⬅️ Swipe ➡️ "
-            },
-            {
-                type: "text",
-                content: `<p> Je cherche à me réchauffer comme je peux et penser à passer du temps avec toi dans un spa est plutôt pas mal. </p>
-                <p>
-                    Toi aussi tu es plutôt pas mal 😉<br>
-                    Je dirais même la plus belle du monde, pour tout ce que tu es. 
-                </p>
-                <p>
-                    Tu as un sourire à tomber par terre, des yeux magnifiques, une personnalité en or et un cœur sans fin. 
-                    Tu me fais sourire, tu me fais fondre et chaque fois que je te vois c'est le coup de foudre </p>
-                <p>
-                    Je crois que ce qui me manque le plus c'est ta chaleur. Cette chaleur que tu émane naturellement par ta présence, ta joie de vivre, ton amour. <br>
-                    Ta chaleur humaine qui me réchauffe le cœur et l'âme. La chaleur de ton corps quand je te prends dans mes bras. Ta présence qui réchauffe mes journées et mes nuits.<br>
-                    Tu me manques et j'ai qu'une hâte, te serrer dans mes bras et ne plus te lâcher. </p>
-                <p>
-                    Je t'aime de tout mon cœur ❤️</²p>`,
-                top: "",
-                bottom: "⬅️ Swipe ➡️"
-            }
-        ];
+    function validateAnswer() {
+      const selected = document.querySelector('input[name="option"]:checked');
+      if (!selected) return;
 
-        let current = 0;
+      const answerIndex = parseInt(selected.value);
+      const correct = questions[current].correct;
 
-        function updateSlide() {
-            const photoContainer = document.getElementById("photoContainer");
-            const textContainer = document.getElementById("textContainer");
-            const photo = document.getElementById("photo");
+      document.getElementById("validateBtn").disabled = true;
 
-            const slide = slides[current];
+      if (answerIndex === correct) {
+        document.getElementById("answer").textContent = "✅ " + questions[current].feedback;
+      } else {
+        document.getElementById("answer").textContent = "❌ Oups ! " + questions[current].feedback;
+      }
 
-            // fade out
-            photoContainer.classList.add("hidden-transition");
-            textContainer.classList.add("hidden-transition");
+      setTimeout(() => {
+        current++;
+        showQuestion();
+      }, 2000);
+    }
 
-            setTimeout(() => {
-                // Mise à jour des citations
-                document.getElementById("quoteTop").textContent = slide.top || "";
-                document.getElementById("quoteBottom").textContent = slide.bottom || "";
-
-                if (slide.type === "image") {
-                    photo.src = slide.src;
-                    photoContainer.classList.remove("hidden");
-                    textContainer.classList.add("hidden");
-                } else if (slide.type === "text") {
-                    textContainer.innerHTML = slide.content;
-                    textContainer.classList.remove("hidden");
-                    photoContainer.classList.add("hidden");
-                }
-
-                // fade in
-                photoContainer.classList.remove("hidden-transition");
-                textContainer.classList.remove("hidden-transition");
-            }, 400); // temps de fade out
-        }
-
-        // Swipe
-        let startX = 0;
-        document.querySelector("main").addEventListener("touchstart", (e) => {
-            startX = e.touches[0].clientX;
-        });
-
-        document.querySelector("main").addEventListener("touchend", (e) => {
-            const endX = e.changedTouches[0].clientX;
-            const diff = startX - endX;
-
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) {
-                    current = (current + 1) % slides.length;
-                } else {
-                    current = (current - 1 + slides.length) % slides.length;
-                }
-                updateSlide();
-            }
-        });
-
-        // Premier affichage
-        updateSlide();
-
-        function prevPhoto() {
-            current = (current - 1 + slides.length) % slides.length;
-            updateSlide();
-        }
-
-        function nextPhoto() {
-            current = (current + 1) % slides.length;
-            updateSlide();
-        }
-    </script>
+    // Première question
+    showQuestion();
+  </script>
 </body>
-
 </html>
