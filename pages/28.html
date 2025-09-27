@@ -1,5 +1,175 @@
 <!-- jour 7 -->
- <!-- retracer notre aventure partie 1 -->
-  <!-- te souviens tu de la première photo que je t'ai montré
-   Oui les papillons
-   et bien aujoud'hui je vais te parler de l'effet papillon -->
+<!-- retracer notre aventure partie 1 -->
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <title>Album - Jour 7</title>
+
+    <link rel="stylesheet" href="../styles/nav_fleches.css">
+    <link rel="stylesheet" href="../styles/polaroid.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+</head>
+
+<body>
+    <h1>❤️ Jour 7 ❤️ </h1>
+
+    <main>
+        <!-- /* Navigation flèches */  -->
+        <!-- <div class="nav left" onclick="prevPhoto()">&#10094;</div>
+        <div class="nav right" onclick="nextPhoto()">&#10095;</div> -->
+        <!-- A enlever avant de publier -->
+
+        <p class="quote top" id="quoteTop">Te souviens tu de la première photo que je t'ai montré</p>
+
+        <div class="polaroid" id="photoContainer">
+            <div id="mediaContainer"><img id="photo" src="../Images/Lalique_papilons.jpg" alt="Photo du jour"></div>
+
+            <p class="caption" id="caption">Oui celle là, avec les papillons</p>
+        </div>
+
+        <p class="quote bottom" id="quoteBottom">⬅️Swipe pour découvrir d’autres souvenirs➡️</p>
+    </main>
+
+    <footer>© Mon Album de Souvenirs · Créé avec amour ❤️</footer>
+
+    <script>
+        updatePhoto();
+
+        const photos = [
+            {
+                type: "img",
+                src: "../Images/Lalique_papilons.jpg",
+                top: "Te souviens tu de la première photo que je t'ai montré",
+                caption: "Oui celle là, avec les papillons",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Dublin_22ans.jpg",
+                top: "Je voulais aujourd'hui te parler de l'effet papillon",
+                caption: "Tout commence par mon départ à Dublin",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Dublin_Auguste.jpg",
+                top: "",
+                caption: "Ma rencontre avec cet idiot",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Dublin_movember.jpg",
+                top: "",
+                caption: "Mes conneries",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/moi_dublin_plus_barbe.jpg",
+                top: "",
+                caption: "Encore..",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Dublin_blond.jpg",
+                top: "",
+                caption: "Et encore..",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Groupe_Halloween.jpg",
+                top: "Mais sans tous ça je ne vous aurais sans doute jamais rencontré",
+                caption: "Evidemment il manque Duncan",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },            {
+                type: "img",
+                src: "../Images/Groupe_deli.jpg",
+                top: "Dire qu'on en a fait un nombre de soirées",
+                caption: "Et ça sans même se regarder ",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Orangerie_beauté.jpg",
+                top: "Et sans tout ça, je n'aurais sans doute jamais rencontré cette beauté",
+                caption: "La plus belle de toutes",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Dolomites_jardin_vue_us2.jpg",
+                top: "J'ai déjà beaucoup raconté, tu connais sans doute déjà la suite de l'histoire mais laisse moi te la raconter un autre jour 😉",
+                caption: "Je t'aime mon amour ❤️",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            }
+        ];
+
+        let current = 0;
+
+        function updatePhoto() {
+            const photoContainer = document.getElementById("photoContainer");
+            const mediaContainer = document.getElementById("mediaContainer");
+
+            photoContainer.classList.add("fade-out");
+
+            setTimeout(() => {
+                // Génère soit une image soit une vidéo
+                if (photos[current].type === "img") {
+                    mediaContainer.innerHTML = `<img src="${photos[current].src}" alt="Souvenir">`;
+                } else if (photos[current].type === "video") {
+                    mediaContainer.innerHTML = `
+                        <video controls autoplay muted loop>
+                            <source src="${photos[current].src}" type="video/mp4">
+                            Ton navigateur ne supporte pas la vidéo.
+                        </video>
+                    `;
+                }
+
+                document.getElementById("quoteTop").textContent = photos[current].top;
+                document.getElementById("quoteBottom").textContent = photos[current].bottom;
+                document.getElementById("caption").textContent = photos[current].caption;
+
+                photoContainer.classList.remove("fade-out");
+            }, 400);
+        }
+
+
+
+        // Gestion du swipe
+        const photoContainer = document.getElementById("photoContainer");
+        let startX = 0;
+
+        photoContainer.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        photoContainer.addEventListener("touchend", (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+
+            if (Math.abs(diff) > 50) { // seuil de swipe
+                if (diff > 0) {
+                    // swipe gauche → photo suivante
+                    current = (current + 1) % photos.length;
+                } else {
+                    // swipe droite → photo précédente
+                    current = (current - 1 + photos.length) % photos.length;
+                }
+                updatePhoto();
+            }
+        });
+    </script>
+
+    <script type="text/javascript" src="../scripts/nav_fleches.js"></script>
+
+</body>
+
+</html>
