@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-    <title>Album - Jour 9</title>
+    <title>Album - Jour 11</title>
 
     <link rel="stylesheet" href="../styles/nav_fleches.css">
     <link rel="stylesheet" href="../styles/polaroid.css">
@@ -17,12 +17,12 @@
 </head>
 
 <body>
-    <h1>❤️ Jour 9 ❤️ </h1>
+    <h1>❤️ Jour 11 ❤️ </h1>
 
     <main>
         <!-- /* Navigation flèches */  -->
-        <div class="nav left" onclick="prevPhoto()">&#10094;</div>
-        <div class="nav right" onclick="nextPhoto()">&#10095;</div>
+        <!-- <div class="nav left" onclick="prevPhoto()">&#10094;</div>
+        <div class="nav right" onclick="nextPhoto()">&#10095;</div> -->
         <!-- A enlever avant de publier -->
 
         <p class="quote top" id="quoteTop"></p>
@@ -45,93 +45,86 @@
         const photos = [
             {
                 type: "img",
-                src: "../Images/Porsche_escalator_us.jpg",
-                top: "A modifier",
-                caption: "Les musées..",
+                src: "../Images/Balade_Donon_vue.jpg",
+                top: "Juste après qu'on ai officialisé notre relation, on s'est mis à se montrer plus",
+                caption: "Notre première sortie publique en amoureux",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Porsche_winner_moi.jpg",
+                src: "../Images/Balade_Donon_groupe.jpg",
+                top: "On était avec tous tes potes du crossfit",
+                caption: "J'étais shy",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Balade_Donon.jpg",
                 top: "",
-                caption: "Un rêve pour moi ce musée Porsche",
+                caption: "Mais trop heureux avec toi",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Porsche_drivers.jpg",
+                src: "../Images/FAV_us.jpg",
                 top: "",
-                caption: "Comment je nous imagine plus tard, au volant d'un bolide",
+                caption: "On est allé à la FAV aussi",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Escape_prison.jpg",
-                top: "Ma première expérience d'escape game",
-                caption: "Et il faut qu'un idiot perde la clé",
-                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
-            },
-            {
-                type: "img",
-                src: "../Images/Escape_espace.jpg",
-                top: "Avec tous mes potes",
-                caption: "Il pouvait pas se taire un peu",
-                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
-            },
-            {
-                type: "img",
-                src: "../Images/EscapeGame_404.jpg",
-                top: "J'ai hâte d'en refaire avec toi",
-                caption: "Même tous les deux on est imbattables",
-                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
-            },
-            {
-                type: "img",
-                src: "../Images/LinkinPark_billets.jpg",
-                top: "Les concerts!!",
-                caption: "Dire que ça a été mon premier concert de toute ma vie",
-                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
-            },
-            {
-                type: "img",
-                src: "../Images/LinkinPark_story.jpg",
+                src: "../Images/FAV_trio.jpg",
                 top: "",
-                caption: "Je n'ai rien de plus à ajouter",
+                caption: "Le trio de choc",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Neuschwanstein_rando_us_milieu.jpg",
-                top: "Les voyages et les randos. Je veux te suivre partout maintenant",
-                caption: "Je n'ai jamais autant voyagé qu'avec toi",
+                src: "../Images/FAV_trio_rire.jpg",
+                top: "Toujours en train de rire",
+                caption: "Et ton dos 🥵",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/accrobranche_picnic.jpg",
-                top: "Je veux refaire de l'accrobranche",
-                caption: "Je crois qu'on a un petit faible pour les pique-niques aussi",
+                src: "../Images/FAV_groupe.jpg",
+                top: "",
+                caption: "Quel expérience pour moi, une première encore",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/badminton_world.jpg",
-                top: "On a vu une compétition de badminton 🥹",
-                caption: "C'était impressionant",
+                src: "../Images/FAV_kiss.jpg",
+                top: "",
+                caption: "Trop heureux, j'avais reçu un bisous de ma chérie",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Tripsdrill_voiture.jpg",
-                top: "J'ai même testé les parcs d'attractions",
-                caption: "Et j'ai pas vomi !",
+                src: "../Images/FAV_sleep.jpg",
+                top: "",
+                caption: "Mais je crois que tu me fatigues 😘",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/picnic.jpg",
-                top: "Merci pour toutes ces découvertes et aventures",
-                caption: "Je crois que ce que je préfère dans tout ça reste de t'emmener en date et te voir sourire",
+                src: "../Images/Parapente_groupe.jpg",
+                top: "",
+                caption: "On a aussi emmené Auguste faire du parapente",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/ile_de_re_groupe.jpg",
+                top: "Je trouve pas de photos avec mes copains",
+                caption: "Mais je suis trop heureux que tu les connaisses tous",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/FAV_us2.jpg",
+                top: "",
+                caption: "Je suis si heureux de pouvoir m'afficher à tes côtés et que tu rencontres tous mes copains",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             }
         ];
