@@ -1,7 +1,5 @@
 <!-- jour 13 -->
-<!-- Moi BG + musique New York -->
-
-<!-- A modifier  -->
+<!-- Moi BG -->
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -18,12 +16,12 @@
 </head>
 
 <body>
-    <h1>❤️ Jour A modifier ❤️ </h1>
+    <h1>❤️ Jour 13 ❤️ </h1>
 
     <main>
         <!-- /* Navigation flèches */  -->
-        <div class="nav left" onclick="prevPhoto()">&#10094;</div>
-        <div class="nav right" onclick="nextPhoto()">&#10095;</div>
+        <!-- <div class="nav left" onclick="prevPhoto()">&#10094;</div>
+        <div class="nav right" onclick="nextPhoto()">&#10095;</div> -->
         <!-- A enlever avant de publier -->
 
         <p class="quote top" id="quoteTop"></p>
@@ -46,86 +44,93 @@
         const photos = [
             {
                 type: "img",
-                src: "../Images/Balade_Donon_vue.jpg",
-                top: "Juste après qu'on ai officialisé notre relation, on s'est mis à se montrer plus",
-                caption: "Notre première sortie publique en amoureux",
+                src: "../Images/Costume_moi.jpg",
+                top: "Quelques photos de moi pour que tu n'oublies pas que de temps en temps je peux être beau",
+                caption: "J'aime trop ce costume",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Balade_Donon_groupe.jpg",
-                top: "On était avec tous tes potes du crossfit",
-                caption: "J'étais shy",
-                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
-            },
-            {
-                type: "img",
-                src: "../Images/Balade_Donon.jpg",
+                src: "../Images/Moi_sorti_coiffeur_chemise.jpg",
                 top: "",
-                caption: "Mais trop heureux avec toi",
+                caption: "Tout propre après le coiffeur",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/FAV_us.jpg",
+                src: "../Images/Moi_béret.jpg",
                 top: "",
-                caption: "On est allé à la FAV aussi",
+                caption: "Même comme ça je suis pas mal",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/FAV_trio.jpg",
+                src: "../Images/Moi_barbe.jpg",
                 top: "",
-                caption: "Le trio de choc",
+                caption: "J'avoue des fois je me laisse aller",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/FAV_trio_rire.jpg",
-                top: "Toujours en train de rire",
-                caption: "Et ton dos 🥵",
-                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
-            },
-            {
-                type: "img",
-                src: "../Images/FAV_groupe.jpg",
+                src: "../Images/Moi_tatouage.jpg",
                 top: "",
-                caption: "Quel expérience pour moi, une première encore",
+                caption: "Je fais de conneries",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/FAV_kiss.jpg",
+                src: "../Images/Moi_couette.jpg",
                 top: "",
-                caption: "Trop heureux, j'avais reçu un bisous de ma chérie",
+                caption: "Et je fais n'importe quoi",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/FAV_sleep.jpg",
+                src: "../Images/Neuschwanstein_moi.jpg",
                 top: "",
-                caption: "Mais je crois que tu me fatigues 😘",
+                caption: "Des fois je transpire et je ressemble à rien",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Parapente_groupe.jpg",
+                src: "../Images/Moi_via_ferrata.jpg",
                 top: "",
-                caption: "On a aussi emmené Auguste faire du parapente",
+                caption: "Clairement pas le plus sexy",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/ile_de_re_groupe.jpg",
-                top: "Je trouve pas de photos avec mes copains",
-                caption: "Mais je suis trop heureux que tu les connaisses tous",
-                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
-            },
-            {
-                type: "img",
-                src: "../Images/FAV_us2.jpg",
+                src: "../Images/Orangerie_moi_mignon.jpg",
                 top: "",
-                caption: "Je suis si heureux de pouvoir m'afficher à tes côtés et que tu rencontres tous mes copains",
+                caption: "Tu me fais toujours sourire et ça se voit",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Brunch_Paris_moi.jpg",
+                top: "",
+                caption: "J'ai le plus beau sourire à tes côtés",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Cork_Dragon_moi.jpg",
+                top: "",
+                caption: "Il m'arrive de prendre la pose",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Bob_caupo_moi.jpg",
+                top: "",
+                caption: "Je reste quand même le plus beau au naturel",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Dolomites_sexy_moi.jpg",
+                top: "",
+                caption: "Je t'aime mon amour ❤️",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             }
         ];

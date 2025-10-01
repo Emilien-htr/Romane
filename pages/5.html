@@ -123,6 +123,13 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
+    .score {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #2d2d2d;
+      margin-top: 1rem;
+    }
+
     footer {
       font-size: 0.85rem;
       color: #666;
@@ -157,6 +164,8 @@
         N'hésite pas à me faire un retour sur les réponses aux questions.<br>
         Peu importe les réponses, la vérité est simple : <br>
         Je t’aime de tout mon cœur ❤️</p>
+      <p class="score" id="finalScore"></p>
+
     </div>
   </main>
 
@@ -195,7 +204,7 @@
         q: "Qui est le plus foufou au lit ?",
         options: ["Romane", "Emilien"],
         correct: 1,
-        feedback: "Ah ça je me dénonce, même si tu as un côté bien câché"
+        feedback: "Ah ça je me dénonce, même si tu cache bien ton jeu toi aussi 😏"
       },
       {
         q: "Qui est le plus gourmand ?",
@@ -246,6 +255,24 @@
         feedback: "Si je devais choisir je dirais tes yeux, parce que j'adore la façon que tu as de me regarder, comme ils brillent en me voyant et la couleur qu'ils prennent au soleil"
       },
       {
+        q: "Où est-ce que je veux absolument faire l'amour dans ma vie ?",
+        options: ["En voiture", "Dans une piscine", "Sur un balcon", "Dans une cabine d'essayage", "En avion", "Au cinéma"],
+        correct: 0,
+        feedback: "Sns doute le plus basique, je veux faire comme Han de fast and furious"
+      },
+      {
+        q: "Quelle est ma chanson préférée ?",
+        options: ["Payphone - Maroon 5", "Clocks - Coldplay", "Numb - Linkin Park", "A Moment Appart - Odesza", "Am I dreaming (Spiderman)", "Fix You - Coldplay"],
+        correct: 3,
+        feedback: "Je me suis mis dans la merde tout seul c'est impossible de choisir. Je dirais A Moment Appart - Odesza, pour les souvenirs que cette chanson me remémore"
+      },
+      {
+        q: "Quelle est ma couleur préférée ?",
+        options: ["Bleu", "Noir", "Vert", "Rouge", "Violet", "Rose"],
+        correct: 2,
+        feedback: "C'est le vert"
+      },
+      {
         q: "Qu'est-ce qui me plaît chez toi ?",
         options: ["Ton sourire", "Ton intelligence", "Ta gentillesse", "Ton corps", "Ta façon de réflechir", "Tes passions", "Tout"],
         correct: 6,
@@ -278,6 +305,7 @@
     ];
 
     let current = 0;
+    let score = 0;
 
     function showQuestion() {
       if (current < questions.length) {
@@ -301,6 +329,7 @@
       } else {
         document.getElementById("quizContainer").style.display = "none";
         document.getElementById("result").style.display = "flex";
+        document.getElementById("finalScore").textContent = `Ton score : ${score}/${questions.length} 💕`;
       }
     }
 
@@ -315,6 +344,7 @@
 
       if (answerIndex === correct) {
         document.getElementById("answer").textContent = "✅ " + questions[current].feedback;
+        score++;
       } else {
         document.getElementById("answer").textContent = "❌ " + questions[current].feedback;
       }
@@ -322,7 +352,7 @@
       setTimeout(() => {
         current++;
         showQuestion();
-      }, 2000);
+      }, 3000);
     }
 
     // Première question
