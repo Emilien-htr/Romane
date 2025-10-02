@@ -1,162 +1,194 @@
-<!-- jour 14 -->
-<!-- Jeu Quizz -->
+<!-- Home menu TBC -->
 
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💖 Jour 14 💖</title>
+  <title>🏠 Mon Album d’Amour</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: "Georgia", serif;
       background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-      width: 100%;
-      text-align: center;
-      overflow-x: hidden;
     }
 
-    h1 {
-      font-family: 'Great Vibes', cursive;
+    /* BOUTONS FLOTTANTS (icônes simples) */
+    .home-btn, .burger {
+      position: fixed;
+      top: 15px;
+      cursor: pointer;
+      z-index: 1200;
+      text-decoration: none;
+      color: #333;
+      font-size: 1.8rem;
+      font-weight: bold;
+      background: none;
+      border: none;
+      box-shadow: none;
+    }
+
+    .home-btn {
+      left: 15px;
+    }
+
+    .burger {
+      right: 15px;
       font-size: 2rem;
-      color: #2d2d2d;
+    }
+
+    /* MENU BURGER */
+    nav {
+      position: fixed;
+      top: 0;
+      right: -260px; /* caché par défaut */
+      width: 260px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.85); /* translucide */
+      box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+      padding: 2rem 1rem;
+      transition: right 0.3s ease;
+      z-index: 1100;
+      visibility: hidden;
+    }
+
+    nav.active {
+      right: 0;
+      visibility: visible;
+    }
+
+    nav h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.8rem;
       margin-bottom: 1rem;
-      margin-top: 1.6rem;
+      color: #444;
     }
 
-    h2 {
-      font-family: "Georgia", serif;
-      font-size: 1.2rem;
-      color: #2d2d2d;
-      margin-top: 1.5rem;
-      margin-bottom: -5rem;
-      margin-inline: 1rem;
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
 
+    nav ul li {
+      margin: 1rem 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      font-size: 1.1rem;
+      color: #444;
+    }
+
+    nav select {
+      width: 100%;
+      padding: 0.6rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 0.5rem;
+    }
+
+    /* CONTENU ACCUEIL */
     main {
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      /* justify-content: first baseline; */
-      padding: 1rem;
+      padding: 2rem;
+      text-align: center;
     }
 
-    .question-box {
-      width: 90%;
-      max-width: 600px;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 1.5rem;
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      color: #2d2d2d;
+      margin-bottom: 1rem;
+    }
+
+    .day-selector {
+      margin-top: 2rem;
+    }
+
+    .day-selector select {
+      padding: 0.9rem 1.2rem;
+      font-size: 1rem;
       border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    .question-box.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .question {
-      font-size: 1.3rem;
-      font-style: italic;
-      margin-bottom: 1rem;
-      color: #444;
-    }
-
-    .options {
-      text-align: left;
-      margin-bottom: 1rem;
-    }
-
-    .options label {
-      display: block;
-      margin: 0.5rem 0;
-      cursor: pointer;
-    }
-
-    .answer {
-      font-size: 1rem;
-      color: #333;
-      margin-top: 0.8rem;
-      font-style: italic;
-    }
-
-    button {
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
       border: none;
-      border-radius: 10px;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      color: #333;
+      font-weight: bold;
       cursor: pointer;
-      background: #f2e0d0;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s, background 0.2s;
-      margin-top: 0.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      appearance: none;
+      outline: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    button:hover {
+    .day-selector select:hover {
       transform: scale(1.05);
-      background: #e6cbb7;
-    }
-
-    .result {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .result img {
-      max-width: 80%;
-      border-radius: 10px;
-      margin-bottom: 1rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.25);
     }
 
     footer {
+      text-align: center;
       font-size: 0.85rem;
       color: #666;
       padding: 1rem;
-      text-align: center;
-      border-top: 1px solid rgba(0, 0, 0, 0.1);
-      background: rgba(255, 255, 255, 0.6);
-      width: 100%;
-      box-sizing: border-box;
+      background: rgba(255, 255, 255, 0.7);
+      border-top: 1px solid rgba(0,0,0,0.1);
     }
   </style>
 </head>
-
 <body>
-  <h1>❤️ Jour 14 ❤️ </h1>
+  <!-- Bouton Home -->
+  <a href="index.html" class="home-btn">🏠</a>
 
-  <h2>Aujourd'hui on va faire un petit Quizz d'amour</h2>
+  <!-- Bouton Burger -->
+  <div class="burger" onclick="toggleMenu()">☰</div>
 
+  <!-- MENU BURGER -->
+  <nav id="menu">
+    <h2>Menu</h2>
+    <ul>
+      <!-- <p>Choisis le jour que tu voudrais voir</p> -->
+      <li>
+        <label for="daysBurger">📖 Choisis un jour :</label>
+        <select id="daysBurger" onchange="goToDay(this.value)">
+          <option value="">-- Sélectionner --</option>
+          <option value="jour1.html">Jour 1</option>
+          <option value="jour2.html">Jour 2</option>
+          <option value="jour3.html">Jour 3</option>
+          <option value="jour4.html">Jour 4</option>
+          <option value="jour5.html">Jour 5</option>
+          <option value="jour6.html">Jour 6</option>
+        </select>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- CONTENU -->
   <main>
-    <!-- Conteneur quiz -->
-    <div id="quizContainer" class="question-box">
-      <p class="question" id="question"></p>
-      <div class="options" id="options"></div>
-      <button id="validateBtn" onclick="validateAnswer()">Valider</button>
-      <p class="answer" id="answer"></p>
-    </div>
+    <h1>Bienvenue dans notre Album d’Amour 💕</h1>
+    <p>Un voyage de souvenirs et de tendresse, jour après jour.</p>
 
-    <!-- Résultat final -->
-    <div class="result" id="result">
-      <img src="../Images/Dolomites_montagne_us.jpg" alt="Merci">
-      <p>Merci d’avoir joué à ce petit quizz <br>
-        N'hésite pas à me faire un retour sur les réponses aux questions.<br>
-        Peu importe les réponses, la vérité est simple : <br>
-        Je t’aime de tout mon cœur ❤️</p>
+    <div class="day-selector">
+      <label for="daysMain">📖 Accéder à un jour :</label><br>
+      <select id="daysMain" onchange="goToDay(this.value)">
+        <option value="">-- Choisir un jour --</option>
+        <option value="1.html">Jour 1</option>
+        <option value="2.html">Jour 2</option>
+        <option value="3.html">Jour 3</option>
+        <option value="4.html">Jour 4</option>
+        <option value="5.html">Jour 5</option>
+        <option value="6.html">Jour 6</option>
+      </select>
     </div>
   </main>
 
@@ -165,169 +197,13 @@
   </footer>
 
   <script>
-    // Tableau des questions à choix multiples
-    const questions = [
-      {
-        q: "Où était notre premier baiser ?",
-        options: ["Dans la rue", "Dans un parc", "Au cinéma", "Chez toi"],
-        correct: 3,
-        feedback: "Et oui peut-être pas le meilleure endroit mais j'avais trop peur avant"
-      },
-      {
-        q: "Qui a embrassé l'autre en premier ?",
-        options: ["Romane", "Emilien"],
-        correct: 1,
-        feedback: "Pour une fois que j'ai fait quelque chose en premier"
-      },
-      {
-        q: "Qui a été le plus avenant dans la drague ?",
-        options: ["Romane", "Emilien"],
-        correct: 0,
-        feedback: "J'ai beau ne pas voir les signes je crois que c'était des appels de phare que tu me faisais"
-      },
-      {
-        q: "Qui est le plus amoureux ?",
-        options: ["Romane", "Emilien"],
-        correct: 1,
-        feedback: "Nianiania c'est moi qui t'aime le plus 😝"
-      },
-      {
-        q: "Qui est le plus foufou au lit ?",
-        options: ["Romane", "Emilien"],
-        correct: 1,
-        feedback: "Ah ça je me dénonce, même si tu as un côté bien câché"
-      },
-      {
-        q: "Qui est le plus gourmand ?",
-        options: ["Romane", "Emilien"],
-        correct: 1,
-        feedback: "C’est moi, évidemment je suis un gros sac 😂"
-      },
-      {
-        q: "Quel est notre pays de rêve à visiter ensemble ?",
-        options: ["Laponie", "Japon", "Islande", "Etats-Unis", "Île Maurice", "Australie"],
-        correct: 1,
-        feedback: "J'aurais tendance à dire le Japon même si l'Islande me parait un bon choix aussi"
-      },
-      {
-        q: "Qui est le plus câlin ?",
-        options: ["Romane", "Emilien"],
-        correct: 1,
-        feedback: "Pour une fois je pense que c'est une égalité même si j'adore avoir des câlins"
-      },
-      {
-        q: "Quelle est ma position préférée au lit ?",
-        options: ["Cowgirl", "Missionaire", "Levrette", "Cuillère", "Sur une chaise", "69", "Sur le plan de travail", "Masturbation mutuelle"],
-        correct: 1,
-        feedback: "A choisir je dirais le missionaire, rien de plus basique et pouvoir te regarder dans les yeux est un délice. Mais quand tu me montes en cowgirl est presque à égalité. Je veux tout tester avec toi"
-      },
-      {
-        q: "Quel est notre plat préféré à deux ?",
-        options: ["Pizza", "Sushi", "Raclette", "Hamburger"],
-        correct: 1,
-        feedback: "Les sushis quand même on a un peu de classe"
-      },
-      {
-        q: "Quel est mon rêve ?",
-        options: ["Une Mustang", "Finir ma vie avec toi", "Une Ducati", "Une maison", "Etre un bon Papa", "Tous les choix"],
-        correct: 5,
-        feedback: "Oui tous"
-      },
-      {
-        q: "Qui est le plus romantique ?",
-        options: ["Romane", "Emilien"],
-        correct: 0,
-        feedback: "Tu fais tellement pour moi, je ne peux que dire toi"
-      },
-      {
-        q: "Quelle partie de ton corps me plait le plus ?",
-        options: ["Ton nez", "Tes fesses", "Ta bouche", "Tes seins", "Tes yeux", "Tes fossettes", "Ton dos", "Tout"],
-        correct: 4,
-        feedback: "Si je devais choisir je dirais tes yeux, parce que j'adore la façon que tu as de me regarder, comme ils brillent en me voyant et la couleur qu'ils prennent au soleil"
-      },
-      {
-        q: "Qu'est-ce qui me plaît chez toi ?",
-        options: ["Ton sourire", "Ton intelligence", "Ta gentillesse", "Ton corps", "Ta façon de réflechir", "Tes passions", "Tout"],
-        correct: 6,
-        feedback: "Tu me plaîs, pour tout ce que tu es. Je ne peux pas choisir"
-      },
-      {
-        q: "Quelle est notre chanson ?",
-        options: ["Perfect – Ed Sheeran", "The emptiness machine – Linkin Park", "When I was your man - Bruno Mars", "Shallow – Lady Gaga", "Payphone - Maroon 5"],
-        correct: 1,
-        feedback: "Emptiness machine ? En vrai je ne sais pas, à toi de me dire"
-      },
-      {
-        q: "Quelle saison je préfère ?",
-        options: ["Printemps", "Eté", "Automne", "Hiver"],
-        correct: 3,
-        feedback: "Ouiiii l'hiver, pour passser mes journées sous le plaid, collé à toi et avec un chocolat chaud pendant qu'il neige dehors"
-      },
-      {
-        q: "Qui a dit 'je t’aime' en premier ?",
-        options: ["Romane", "Emilien"],
-        correct: 0,
-        feedback: "Cette fois encore tu m'as devancé"
-      },
-      {
-        q: "Quel est notre rêve commun ?",
-        options: ["Avoir une maison", "Voyager", "Un chien", "Des enfants", "Tout ça à la fois"],
-        correct: 4,
-        feedback: "Evidemment tout, je veux faire ma vie avec toi"
-      }
-    ];
-
-    let current = 0;
-
-    function showQuestion() {
-      if (current < questions.length) {
-        const box = document.getElementById("quizContainer");
-        box.classList.remove("active"); // cache transition
-        setTimeout(() => {
-          document.getElementById("question").textContent = questions[current].q;
-          const optionsDiv = document.getElementById("options");
-          optionsDiv.innerHTML = "";
-          questions[current].options.forEach((opt, i) => {
-            optionsDiv.innerHTML += `
-              <label>
-                <input type="radio" name="option" value="${i}"> ${opt}
-              </label>
-            `;
-          });
-          document.getElementById("answer").textContent = "";
-          document.getElementById("validateBtn").disabled = false;
-          setTimeout(() => box.classList.add("active"), 50); // réaffiche
-        }, 300);
-      } else {
-        document.getElementById("quizContainer").style.display = "none";
-        document.getElementById("result").style.display = "flex";
-      }
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("active");
     }
 
-    function validateAnswer() {
-      const selected = document.querySelector('input[name="option"]:checked');
-      if (!selected) return;
-
-      const answerIndex = parseInt(selected.value);
-      const correct = questions[current].correct;
-
-      document.getElementById("validateBtn").disabled = true;
-
-      if (answerIndex === correct) {
-        document.getElementById("answer").textContent = "✅ " + questions[current].feedback;
-      } else {
-        document.getElementById("answer").textContent = "❌ " + questions[current].feedback;
-      }
-
-      setTimeout(() => {
-        current++;
-        showQuestion();
-      }, 2000);
+    function goToDay(page) {
+      if (page) window.location.href = page;
     }
-
-    // Première question
-    showQuestion();
   </script>
 </body>
-
 </html>

@@ -1,144 +1,170 @@
-<!-- quizz -->
+<!-- Accueil premier essai -->
 
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💖 Quizz d'Amour 💖</title>
+  <title>🏠 Mon Album d’Amour</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: "Georgia", serif;
       background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-      text-align: center;
     }
 
-    h1 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.4rem;
-      color: #2d2d2d;
-      margin: 1.5rem 0;
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 0.5rem 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 1000;
     }
 
+    header .home-btn {
+      font-size: 1.2rem;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    /* MENU BURGER */
+    .burger {
+      font-size: 2rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      right: -250px;
+      width: 250px;
+      height: 100%;
+      background: #fff;
+      box-shadow: -2px 0 6px rgba(0,0,0,0.1);
+      padding: 2rem 1rem;
+      transition: right 0.3s ease;
+    }
+
+    nav.active {
+      right: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li {
+      margin: 1rem 0;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      font-size: 1.1rem;
+      color: #444;
+    }
+
+    /* CONTENU ACCUEIL */
     main {
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 1rem;
+      padding: 2rem;
+      margin-top: 3rem;
     }
 
-    .question-box {
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      color: #2d2d2d;
+      margin-bottom: 1rem;
+    }
+
+    .links {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1rem;
       max-width: 600px;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      width: 100%;
+      margin-top: 2rem;
     }
 
-    .question-box.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .question {
-      font-size: 1.3rem;
-      font-style: italic;
-      margin-bottom: 1rem;
-      color: #444;
-    }
-
-    .options {
-      text-align: left;
-      margin-bottom: 1rem;
-    }
-
-    .options label {
+    .links a {
       display: block;
-      margin: 0.5rem 0;
-      cursor: pointer;
-    }
-
-    .answer {
-      font-size: 1rem;
+      text-decoration: none;
+      background: rgba(255,255,255,0.8);
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       color: #333;
-      margin-top: 0.8rem;
-      font-style: italic;
-    }
-
-    button {
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      background: #f2e0d0;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-weight: bold;
       transition: transform 0.2s, background 0.2s;
-      margin-top: 0.5rem;
     }
 
-    button:hover {
+    .links a:hover {
       transform: scale(1.05);
-      background: #e6cbb7;
-    }
-
-    .result {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .result img {
-      max-width: 80%;
-      border-radius: 10px;
-      margin-bottom: 1rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      background: #f3e1d6;
     }
 
     footer {
+      text-align: center;
       font-size: 0.85rem;
       color: #666;
       padding: 1rem;
-      text-align: center;
-      border-top: 1px solid rgba(0, 0, 0, 0.1);
-      background: rgba(255, 255, 255, 0.6);
-      width: 100%;
-      box-sizing: border-box;
+      background: rgba(255, 255, 255, 0.7);
+      border-top: 1px solid rgba(0,0,0,0.1);
     }
   </style>
 </head>
-
 <body>
-  <h1>💖 Quizz d'Amour 💖</h1>
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="home-btn">🏠 Home</a>
+    <div class="burger" onclick="toggleMenu()">☰</div>
+  </header>
 
+  <!-- MENU BURGER -->
+  <nav id="menu">
+    <ul>
+      <li><a href="jour1.html">Jour 1</a></li>
+      <li><a href="jour2.html">Jour 2</a></li>
+      <li><a href="jour3.html">Jour 3</a></li>
+      <li><a href="jour4.html">Jour 4</a></li>
+      <li><a href="jour5.html">Jour 5</a></li>
+      <li><a href="jour6.html">Jour 6</a></li>
+      <li><a href="quizz.html">💖 Quizz d’Amour</a></li>
+    </ul>
+  </nav>
+
+  <!-- CONTENU -->
   <main>
-    <!-- Conteneur quiz -->
-    <div id="quizContainer" class="question-box">
-      <p class="question" id="question"></p>
-      <div class="options" id="options"></div>
-      <button id="validateBtn" onclick="validateAnswer()">Valider</button>
-      <p class="answer" id="answer"></p>
-    </div>
+    <h1>Bienvenue dans notre Album d’Amour 💕</h1>
+    <p>Sélectionne un jour pour revivre nos plus beaux souvenirs.</p>
 
-    <!-- Résultat final -->
-    <div class="result" id="result">
-      <img src="../Images/merci.jpg" alt="Merci">
-      <p>Merci d’avoir joué à ce petit quizz 💕 <br>
-        Peu importe les réponses, la vérité est simple : <br>
-        Je t’aime de tout mon cœur ❤️</p>
+    <div class="links">
+      <a href="jour1.html">Jour 1</a>
+      <a href="jour2.html">Jour 2</a>
+      <a href="jour3.html">Jour 3</a>
+      <a href="jour4.html">Jour 4</a>
+      <a href="jour5.html">Jour 5</a>
+      <a href="jour6.html">Jour 6</a>
+      <a href="quizz.html">💖 Quizz d’Amour</a>
     </div>
   </main>
 
@@ -147,121 +173,9 @@
   </footer>
 
   <script>
-    // Tableau des questions à choix multiples
-    const questions = [
-      {
-        q: "Où était notre premier baiser ?",
-        options: ["Dans la rue", "Dans un parc", "Au cinéma", "Chez toi"],
-        correct: 1,
-        feedback: "C’était bien dans le parc 🌳, un souvenir magique ❤️"
-      },
-      {
-        q: "Qui est le plus amoureux ?",
-        options: ["Toi", "Moi"],
-        correct: 0,
-        feedback: "Toi sans hésiter... mais moi je t’aime encore plus 😍"
-      },
-      {
-        q: "Qui est le plus gourmand ?",
-        options: ["Toi", "Moi"],
-        correct: 1,
-        feedback: "C’est moi 🍫... mais j’adore partager avec toi !"
-      },
-      {
-        q: "Quel est notre pays de rêve à visiter ensemble ?",
-        options: ["Italie", "Japon", "Islande", "Canada"],
-        correct: 2,
-        feedback: "L’Islande ❄️, on ira voir les aurores boréales ensemble 🌌"
-      },
-      {
-        q: "Qui est le plus câlin ?",
-        options: ["Toi", "Moi"],
-        correct: 0,
-        feedback: "Toi 💕... mais je ne me lasse jamais de tes câlins 🥰"
-      },
-      {
-        q: "Quel est notre plat préféré à deux ?",
-        options: ["Pizza", "Sushi", "Raclette", "Pâtes"],
-        correct: 2,
-        feedback: "La raclette 🧀, parfaite pour se coller l’hiver ❄️"
-      },
-      {
-        q: "Qui est le plus romantique ?",
-        options: ["Toi", "Moi"],
-        correct: 1,
-        feedback: "C’est moi 💌, mais c’est facile avec toi ✨"
-      },
-      {
-        q: "Quelle est la chanson qui nous représente ?",
-        options: ["Perfect – Ed Sheeran", "All of Me – John Legend", "La Vie en Rose – Piaf", "Shallow – Lady Gaga"],
-        correct: 0,
-        feedback: "Perfect 🎶... comme toi 💕"
-      },
-      {
-        q: "Qui a dit 'je t’aime' en premier ?",
-        options: ["Toi", "Moi"],
-        correct: 0,
-        feedback: "Toi... le plus beau moment de ma vie ❤️"
-      },
-      {
-        q: "Quel est notre rêve commun ?",
-        options: ["Avoir une maison", "Voyager", "Un chien", "Tout ça à la fois"],
-        correct: 3,
-        feedback: "Tout ça à la fois 🏡🐶✈️... avec toi c’est certain 💕"
-      }
-    ];
-
-    let current = 0;
-
-    function showQuestion() {
-      if (current < questions.length) {
-        const box = document.getElementById("quizContainer");
-        box.classList.remove("active"); // cache transition
-        setTimeout(() => {
-          document.getElementById("question").textContent = questions[current].q;
-          const optionsDiv = document.getElementById("options");
-          optionsDiv.innerHTML = "";
-          questions[current].options.forEach((opt, i) => {
-            optionsDiv.innerHTML += `
-              <label>
-                <input type="radio" name="option" value="${i}"> ${opt}
-              </label>
-            `;
-          });
-          document.getElementById("answer").textContent = "";
-          document.getElementById("validateBtn").disabled = false;
-          setTimeout(() => box.classList.add("active"), 50); // réaffiche
-        }, 300);
-      } else {
-        document.getElementById("quizContainer").style.display = "none";
-        document.getElementById("result").style.display = "flex";
-      }
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("active");
     }
-
-    function validateAnswer() {
-      const selected = document.querySelector('input[name="option"]:checked');
-      if (!selected) return;
-
-      const answerIndex = parseInt(selected.value);
-      const correct = questions[current].correct;
-
-      document.getElementById("validateBtn").disabled = true;
-
-      if (answerIndex === correct) {
-        document.getElementById("answer").textContent = "✅ " + questions[current].feedback;
-      } else {
-        document.getElementById("answer").textContent = "❌ Oups ! " + questions[current].feedback;
-      }
-
-      setTimeout(() => {
-        current++;
-        showQuestion();
-      }, 2000);
-    }
-
-    // Première question
-    showQuestion();
   </script>
 </body>
-
 </html>

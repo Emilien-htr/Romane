@@ -1,0 +1,136 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Georgia", serif;
+  background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* BOUTONS FLOTTANTS (icônes simples) */
+.home-btn, .burger {
+  position: fixed;
+  top: 15px;
+  cursor: pointer;
+  z-index: 1200;
+  text-decoration: none;
+  color: #333;
+  font-size: 1.8rem;
+  font-weight: bold;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.home-btn {
+  left: 15px;
+}
+
+.burger {
+  right: 15px;
+  font-size: 2rem;
+}
+
+/* MENU BURGER */
+nav {
+  position: fixed;
+  top: 0;
+  right: -260px; /* caché par défaut */
+  width: 260px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.85); /* translucide */
+  box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+  padding: 2rem 1rem;
+  transition: right 0.3s ease;
+  z-index: 1100;
+  visibility: hidden;
+}
+
+nav.active {
+  right: 0;
+  visibility: visible;
+}
+
+nav h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  margin: 1rem 0;
+}
+
+nav ul li a {
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: #444;
+}
+
+nav select {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 0.5rem;
+}
+
+/* CONTENU ACCUEIL */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.5rem;
+  color: #2d2d2d;
+  margin-bottom: 1rem;
+}
+
+.day-selector {
+  margin-top: 2rem;
+}
+
+.day-selector select {
+  padding: 0.9rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #ffecd2, #fcb69f);
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  appearance: none;
+  outline: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.day-selector select:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+footer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #666;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-top: 1px solid rgba(0,0,0,0.1);
+}

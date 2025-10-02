@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🏠 Mon Album d’Amour</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Bouton Home -->
+  <a href="index.html" class="home-btn">🏠</a>
+
+  <!-- Bouton Burger -->
+  <div class="burger" onclick="toggleMenu()">☰</div>
+
+  <!-- MENU BURGER -->
+  <nav id="menu">
+    <h2>Menu</h2>
+    <ul>
+      <li><a href="quizz.html">💖 Quizz d’Amour</a></li>
+      <li>
+        <label for="daysBurger">📖 Choisis un jour :</label>
+        <select id="daysBurger" onchange="goToDay(this.value)">
+          <option value="">-- Sélectionner --</option>
+          <option value="jour1.html">Jour 1</option>
+          <option value="jour2.html">Jour 2</option>
+          <option value="jour3.html">Jour 3</option>
+          <option value="jour4.html">Jour 4</option>
+          <option value="jour5.html">Jour 5</option>
+          <option value="jour6.html">Jour 6</option>
+        </select>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- CONTENU -->
+  <main>
+    <h1>Bienvenue dans notre Album d’Amour 💕</h1>
+    <p>Un voyage de souvenirs et de tendresse, jour après jour.</p>
+
+    <div class="day-selector">
+      <label for="daysMain">📖 Accéder à un jour :</label><br>
+      <select id="daysMain" onchange="goToDay(this.value)">
+        <option value="">-- Choisir un jour --</option>
+        <option value="jour1.html">Jour 1</option>
+        <option value="jour2.html">Jour 2</option>
+        <option value="jour3.html">Jour 3</option>
+        <option value="jour4.html">Jour 4</option>
+        <option value="jour5.html">Jour 5</option>
+        <option value="jour6.html">Jour 6</option>
+      </select>
+    </div>
+  </main>
+
+  <footer>
+    © Mon Album de Souvenirs · Créé avec amour ❤️
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
