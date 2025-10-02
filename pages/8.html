@@ -1,7 +1,6 @@
 <!-- jour 17 -->
- <!-- Sofia -->
+<!-- Sofia -->
 
- 
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -21,8 +20,8 @@
 
     <main>
         <!-- /* Navigation flèches */  -->
-        <div class="nav left" onclick="prevPhoto()">&#10094;</div>
-        <div class="nav right" onclick="nextPhoto()">&#10095;</div>
+        <!-- <div class="nav left" onclick="prevPhoto()">&#10094;</div>
+        <div class="nav right" onclick="nextPhoto()">&#10095;</div> -->
         <!-- A enlever avant de publier -->
 
         <p class="quote top" id="quoteTop"></p>
@@ -45,93 +44,114 @@
         const photos = [
             {
                 type: "img",
-                src: "../Images/Costume_moi.jpg",
-                top: "Quelques photos de moi pour que tu n'oublies pas que de temps en temps je peux être beau",
-                caption: "J'aime trop ce costume",
+                src: "../Images/Sofia_aéroport.jpg",
+                top: "Une des aventures les plus lointaine qu'on a fait, c'est Sofia (pour l'instant)",
+                caption: "On était équipé dans l'aéroport déjà",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Moi_sorti_coiffeur_chemise.jpg",
+                src: "../Images/Sofia_cathedrale.jpg",
                 top: "",
-                caption: "Tout propre après le coiffeur",
+                caption: "Sans doute le plus beau monument sur place..",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Moi_béret.jpg",
+                src: "../Images/Sofia_cathedrale_beaute.jpg",
                 top: "",
-                caption: "Même comme ça je suis pas mal",
+                caption: "Après toi parce que tu es la plus belle",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Moi_barbe.jpg",
+                src: "../Images/Sofia_cathedral_nuit.jpg",
                 top: "",
-                caption: "J'avoue des fois je me laisse aller",
+                caption: "Magnifique de nuit aussi d'ailleurs",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Moi_tatouage.jpg",
+                src: "../Images/Sofia_bar.jpg",
                 top: "",
-                caption: "Je fais de conneries",
+                caption: "On a testé le bar de l'hôtel, bien trop huppé pour nous ",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Moi_couette.jpg",
+                src: "../Images/Sofia_ruines_us.jpg",
                 top: "",
-                caption: "Et je fais n'importe quoi",
+                caption: "Les ruines de la ville toujous emmitouflé jusqu'au cou",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "video",
+                src: "../Images/Sofia_hotel.mp4",
+                top: "J'ai completement oublié notre chambre d'hôtel. Elle était immense et hyper agréable",
+                caption: "On ne vas pas dire les bêtises qu'on a fait dans cette chambre 🫣",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Neuschwanstein_moi.jpg",
-                top: "",
-                caption: "Des fois je transpire et je ressemble à rien",
+                src: "../Images/Sofia_brunch.jpg",
+                top: "Et dans cette fameuse chambre je t'ai suprise avec un bon petit déjeuner au lit pour ton anniversaire",
+                caption: "Il va falloir que je me surpasse cette année",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Moi_via_ferrata.jpg",
-                top: "",
-                caption: "Clairement pas le plus sexy",
+                src: "../Images/Sofia_Sleep.jpg",
+                top: "Encore une fois tu me fatigue 😝 En vrai c'est plutôt le froid",
+                caption: "Et peut-être la surprise que toi aussi tu m'as fait 🥵",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Orangerie_moi_mignon.jpg",
+                src: "../Images/Sofia_nouvel_an.jpg",
                 top: "",
-                caption: "Tu me fais toujours sourire et ça se voit",
+                caption: "On a fait nouvel an en amoureux. Aussi une première pour moi",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Brunch_Paris_moi.jpg",
-                top: "",
-                caption: "J'ai le plus beau sourire à tes côtés",
+                src: "../Images/Sofia_nouvel_an2.jpg",
+                top: "Les danseurs et les musiques étaient trop cool ",
+                caption: "J'étais avec la meilleure amoureuse du monde",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Cork_Dragon_moi.jpg",
+                src: "../Images/Sofia_russe.jpg",
                 top: "",
-                caption: "Il m'arrive de prendre la pose",
+                caption: "Je sais pas si tu te rappel ce restaurant mais il était hyper bon",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Bob_caupo_moi.jpg",
+                src: "../Images/Sofia_monastery_full.jpg",
                 top: "",
-                caption: "Je reste quand même le plus beau au naturel",
+                caption: "On a aussi vu un monastère trop stylé au milieu des montagnes",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             },
             {
                 type: "img",
-                src: "../Images/Dolomites_sexy_moi.jpg",
+                src: "../Images/Sofia_monastery_us.jpg",
                 top: "",
-                caption: "Je t'aime mon amour ❤️",
+                caption: "Toujours avec ma princesse",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Sofia_moi_et_cie.jpg",
+                top: "On a fait un peu tout le tour de la ville finalement",
+                caption: "Avec mes potes",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Sofia_avion.jpg",
+                top: "Je sais que j'ai loupé pas mal de photo mais c'était surtout pour dire que j'adore tout partager avec toi",
+                caption: "Un peu mélancolique sur le retour 🥹",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             }
         ];
