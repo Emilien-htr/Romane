@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,7 @@
     }
   </style>
 </head>
+
 <body>
   <p>Chargement de la page du jour...</p>
   <script>
@@ -24,10 +26,14 @@
 
 
     const limitDate = new Date(2025, 8, 22); // 22 septembre 2025 (mois 0-indexé)
+    const Upperlimit = new Date(2025, 9, 9);
+
 
     if (today < limitDate) {
       // Avant la date limite → page spéciale
       window.location.href = "pages/earlybird.html";
+    } else if (today > Upperlimit) {
+      window.location.href = "pages/home.html";
     } else {
       // Après la date limite → rotation mensuelle
       const day = today.getDate(); // 1 → 31
@@ -36,12 +42,8 @@
       window.location.href = targetPage;
     }
 
-
-    /*
-    rajouter la date de fin et la page spéciale pour cette date
-    Faire une page après cette date pour que toutes les pages soient accessibles  
-    */
   </script>
-  
+
 </body>
+
 </html>
