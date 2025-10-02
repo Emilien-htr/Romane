@@ -1,2 +1,219 @@
 <!-- jour 15 -->
 <!-- Neuschwanstein -->
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <title>Album - Jour 15</title>
+
+    <link rel="stylesheet" href="../styles/nav_fleches.css">
+    <link rel="stylesheet" href="../styles/polaroid.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+</head>
+
+<body>
+    <h1>❤️ Jour 15 ❤️ </h1>
+
+    <main>
+        <!-- /* Navigation flèches */  -->
+        <!-- <div class="nav left" onclick="prevPhoto()">&#10094;</div>
+        <div class="nav right" onclick="nextPhoto()">&#10095;</div> -->
+        <!-- A enlever avant de publier -->
+
+        <p class="quote top" id="quoteTop"></p>
+
+        <div class="polaroid" id="photoContainer">
+            <!-- <div id="mediaContainer"><img id="photo" src="../Images/Lalique_papilons.jpg" alt="Photo du jour"></div> -->
+            <div id="mediaContainer"></div>
+
+            <p class="caption" id="caption"></p>
+        </div>
+
+        <p class="quote bottom" id="quoteBottom">⬅️Swipe pour découvrir d’autres souvenirs➡️</p>
+    </main>
+
+    <footer>© Mon Album de Souvenirs · Créé avec amour ❤️</footer>
+
+    <script>
+        updatePhoto();
+
+        const photos = [
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_chateau.jpg",
+                top: "Aujourd'hui on va retourner au Neuschwanstein",
+                caption: "Il est quand même beau",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_chateau_us.jpg",
+                top: "Alors oui ces vacances n'ont pas bien commencé, il y avait des bouchons, on s'est pris la tête..",
+                caption: "On a essayé de poser avec le soleil",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_vue_chateau.jpg",
+                top: "Clairement le premier jour n'était pas notre jour",
+                caption: "La vue est belle",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_biere.jpg",
+                top: "",
+                caption: "On a quand même eu le droit à un bon repas et une bonne bière allemande",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_rando_us_bas.jpg",
+                top: "Heureusement on s'est expliqué, on a dormi. Le lendemain on avait autre chose sur quoi râler",
+                caption: "La on est encore frais on ne sait pas à quoi à s'attendre",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_rando_us_milieu.jpg",
+                top: "",
+                caption: "La première pause après une monté à 1000%",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_rando_us_midi.jpg",
+                top: "Notre état qui se dégrade petit à petit",
+                caption: "La pause du midi",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_rando_us_haut.jpg",
+                top: "Et le sommet !!!",
+                caption: "La vue était belle",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_sommet_beaute.jpg",
+                top: "Je sais pas si je regardais plus la vue ou toi",
+                caption: "Vraiment trop belle",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_fatigue descente.jpg",
+                top: "Après ça la descente a été longue",
+                caption: "On voit déjà la fatigue",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_pont.jpg",
+                top: "On a à peine eu  la force de prendre quelques photos",
+                caption: "On a revu ce fameux pont mais loin des touristes",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_stats.jpg",
+                top: "",
+                caption: "On a fait tout ça 🤯🤯",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_montagne_bas.jpg",
+                top: "Cette rando nous à remis les idées en place et on était tellement fier de l'avoir fini",
+                caption: "On s'est surpassé, c'était une aventure de dingue !",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_fin.jpg",
+                top: "On peut voir qu'on a bien souffert..",
+                caption: "On a vite mangé et la douche après tout ça quel bohneur.",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_midi bisou.jpg",
+                top: "Je ne sais toujours pas comment on a fait pour se sauter dessus le soir, les émotions ont dû nous rendre euphoriques. Et puis tu es tellement sexy je ne peux pas te resister",
+                caption: "C'était tellement bien pour finir cette journée de folie. Je pense que c'est une de nos meilleur baise (désolé du terme) avec le plein d'émotions et la fatigue physique",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_chaise_sommet_beaute.jpg",
+                top: "",
+                caption: "A quand la prochaine rando ?",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            }
+        ];
+
+        let current = 0;
+
+        function updatePhoto() {
+            const photoContainer = document.getElementById("photoContainer");
+            const mediaContainer = document.getElementById("mediaContainer");
+
+            photoContainer.classList.add("fade-out");
+
+            setTimeout(() => {
+                // Génère soit une image soit une vidéo
+                if (photos[current].type === "img") {
+                    mediaContainer.innerHTML = `<img src="${photos[current].src}" alt="Souvenir">`;
+                } else if (photos[current].type === "video") {
+                    mediaContainer.innerHTML = `
+                        <video controls autoplay muted loop>
+                            <source src="${photos[current].src}" type="video/mp4">
+                            Ton navigateur ne supporte pas la vidéo.
+                        </video>
+                    `;
+                }
+
+                document.getElementById("quoteTop").textContent = photos[current].top;
+                document.getElementById("quoteBottom").textContent = photos[current].bottom;
+                document.getElementById("caption").textContent = photos[current].caption;
+
+                photoContainer.classList.remove("fade-out");
+            }, 400);
+        }
+
+
+
+        // Gestion du swipe
+        const photoContainer = document.getElementById("photoContainer");
+        let startX = 0;
+
+        photoContainer.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        photoContainer.addEventListener("touchend", (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+
+            if (Math.abs(diff) > 50) { // seuil de swipe
+                if (diff > 0) {
+                    // swipe gauche → photo suivante
+                    current = (current + 1) % photos.length;
+                } else {
+                    // swipe droite → photo précédente
+                    current = (current - 1 + photos.length) % photos.length;
+                }
+                updatePhoto();
+            }
+        });
+    </script>
+
+    <script type="text/javascript" src="../scripts/nav_fleches.js"></script>
+
+</body>
+
+</html>

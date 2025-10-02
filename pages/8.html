@@ -1,2 +1,199 @@
 <!-- jour 17 -->
  <!-- Sofia -->
+
+ 
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <title>Album - Jour 11</title>
+
+    <link rel="stylesheet" href="../styles/nav_fleches.css">
+    <link rel="stylesheet" href="../styles/polaroid.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+</head>
+
+<body>
+    <h1>❤️ Jour A modiier ❤️ </h1>
+
+    <main>
+        <!-- /* Navigation flèches */  -->
+        <div class="nav left" onclick="prevPhoto()">&#10094;</div>
+        <div class="nav right" onclick="nextPhoto()">&#10095;</div>
+        <!-- A enlever avant de publier -->
+
+        <p class="quote top" id="quoteTop"></p>
+
+        <div class="polaroid" id="photoContainer">
+            <!-- <div id="mediaContainer"><img id="photo" src="../Images/Lalique_papilons.jpg" alt="Photo du jour"></div> -->
+            <div id="mediaContainer"></div>
+
+            <p class="caption" id="caption"></p>
+        </div>
+
+        <p class="quote bottom" id="quoteBottom">⬅️Swipe pour découvrir d’autres souvenirs➡️</p>
+    </main>
+
+    <footer>© Mon Album de Souvenirs · Créé avec amour ❤️</footer>
+
+    <script>
+        updatePhoto();
+
+        const photos = [
+            {
+                type: "img",
+                src: "../Images/Costume_moi.jpg",
+                top: "Quelques photos de moi pour que tu n'oublies pas que de temps en temps je peux être beau",
+                caption: "J'aime trop ce costume",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Moi_sorti_coiffeur_chemise.jpg",
+                top: "",
+                caption: "Tout propre après le coiffeur",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Moi_béret.jpg",
+                top: "",
+                caption: "Même comme ça je suis pas mal",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Moi_barbe.jpg",
+                top: "",
+                caption: "J'avoue des fois je me laisse aller",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Moi_tatouage.jpg",
+                top: "",
+                caption: "Je fais de conneries",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Moi_couette.jpg",
+                top: "",
+                caption: "Et je fais n'importe quoi",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Neuschwanstein_moi.jpg",
+                top: "",
+                caption: "Des fois je transpire et je ressemble à rien",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Moi_via_ferrata.jpg",
+                top: "",
+                caption: "Clairement pas le plus sexy",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Orangerie_moi_mignon.jpg",
+                top: "",
+                caption: "Tu me fais toujours sourire et ça se voit",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Brunch_Paris_moi.jpg",
+                top: "",
+                caption: "J'ai le plus beau sourire à tes côtés",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Cork_Dragon_moi.jpg",
+                top: "",
+                caption: "Il m'arrive de prendre la pose",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Bob_caupo_moi.jpg",
+                top: "",
+                caption: "Je reste quand même le plus beau au naturel",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            },
+            {
+                type: "img",
+                src: "../Images/Dolomites_sexy_moi.jpg",
+                top: "",
+                caption: "Je t'aime mon amour ❤️",
+                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+            }
+        ];
+
+        let current = 0;
+
+        function updatePhoto() {
+            const photoContainer = document.getElementById("photoContainer");
+            const mediaContainer = document.getElementById("mediaContainer");
+
+            photoContainer.classList.add("fade-out");
+
+            setTimeout(() => {
+                // Génère soit une image soit une vidéo
+                if (photos[current].type === "img") {
+                    mediaContainer.innerHTML = `<img src="${photos[current].src}" alt="Souvenir">`;
+                } else if (photos[current].type === "video") {
+                    mediaContainer.innerHTML = `
+                        <video controls autoplay muted loop>
+                            <source src="${photos[current].src}" type="video/mp4">
+                            Ton navigateur ne supporte pas la vidéo.
+                        </video>
+                    `;
+                }
+
+                document.getElementById("quoteTop").textContent = photos[current].top;
+                document.getElementById("quoteBottom").textContent = photos[current].bottom;
+                document.getElementById("caption").textContent = photos[current].caption;
+
+                photoContainer.classList.remove("fade-out");
+            }, 400);
+        }
+
+
+
+        // Gestion du swipe
+        const photoContainer = document.getElementById("photoContainer");
+        let startX = 0;
+
+        photoContainer.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        photoContainer.addEventListener("touchend", (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+
+            if (Math.abs(diff) > 50) { // seuil de swipe
+                if (diff > 0) {
+                    // swipe gauche → photo suivante
+                    current = (current + 1) % photos.length;
+                } else {
+                    // swipe droite → photo précédente
+                    current = (current - 1 + photos.length) % photos.length;
+                }
+                updatePhoto();
+            }
+        });
+    </script>
+
+    <script type="text/javascript" src="../scripts/nav_fleches.js"></script>
+
+</body>
+
+</html>
