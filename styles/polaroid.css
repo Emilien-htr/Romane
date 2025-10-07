@@ -93,6 +93,7 @@ main {
 } */
 
 .polaroid.fade-out img,
+.polaroid.fade-out text,
 .polaroid.fade-out video {
     opacity: 0;
 }

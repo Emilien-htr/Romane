@@ -4,142 +4,241 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-    <title>Home</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Album d’Amour</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Georgia", serif;
+      background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-    <link rel="stylesheet" href="../styles/nav_fleches.css">
-    <link rel="stylesheet" href="../styles/polaroid.css">
-    <link rel="stylesheet" href="../styles/footer.css">
+    /* BOUTONS FLOTTANTS (icônes simples) */
+    .home-btn,
+    .burger {
+      position: fixed;
+      top: 15px;
+      cursor: pointer;
+      z-index: 1200;
+      text-decoration: none;
+      color: #333;
+      font-size: 1.8rem;
+      font-weight: bold;
+      background: none;
+      border: none;
+      box-shadow: none;
+    }
 
-    <style>
-        .polaroid {
-            text-align: left;
-            line-height: 1.6;
-            font-size: 0.95rem;
-            font-family: "Georgia", serif;
-            color: #444;
-        }
-    </style>
+    .home-btn {
+      left: 15px;
+    }
+
+    .burger {
+      right: 15px;
+      font-size: 2rem;
+    }
+
+    /* MENU BURGER */
+    nav {
+      position: fixed;
+      top: 0;
+      right: -260px;
+      /* caché par défaut */
+      width: 260px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.85);
+      /* translucide */
+      box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
+      padding: 2rem 1rem;
+      transition: right 0.3s ease;
+      z-index: 1100;
+      visibility: hidden;
+    }
+
+    nav.active {
+      right: 0;
+      visibility: visible;
+    }
+
+    nav h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      color: #444;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li {
+      margin: 1rem 0;
+      font-size: 1.1rem;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      font-size: 1.1rem;
+      color: #444;
+    }
+
+    nav select {
+      width: 100%;
+      padding: 0.6rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 0.5rem;
+    }
+
+    /* CONTENU ACCUEIL */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      color: #2d2d2d;
+      margin-bottom: 1rem;
+    }
+
+    .day-selector {
+      margin-top: 2rem;
+    }
+
+    .day-selector select {
+      padding: 0.9rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      color: #333;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      appearance: none;
+      outline: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-align: left;
+    }
+
+    .day-selector select:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #666;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.7);
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  </style>
 </head>
 
 <body>
-    <h1>❤️ Home ❤️ </h1>
+  <!-- Bouton Home -->
+  <a href="home.html" class="home-btn">🏠</a>
 
-    <main>
-        <!-- /* Navigation flèches */  -->
-        <div class="nav left" onclick="prevPhoto()">&#10094;</div>
-        <div class="nav right" onclick="nextPhoto()">&#10095;</div>
-        <!-- A enlever avant de publier -->
+  <!-- Bouton Burger -->
+  <div class="burger" onclick="toggleMenu()">☰</div>
 
-        <p class="quote top" id="quoteTop"></p>
+  <!-- MENU BURGER -->
+  <nav id="menu">
+    <h2>Menu</h2>
+    <ul>
+      <!-- <p>Choisis le jour que tu voudrais voir</p> -->
+      <li>
+        <label for="daysBurger">📖 Choisis un jour :</label>
+        <select id="daysBurger" onchange="goToDay(this.value)">
+          <option value="">-- Choisir un jour --</option>
+          <option value="earlybird.html">Earlybird</option>
+          <option value="22.html">Jour 1 - Bienvenue aux US</option>
+          <option value="23.html">Jour 2 - Photo de bienvenue</option>
+          <option value="24.html">Jour 3 - Italie / Dolomites</option>
+          <option value="25.html">Jour 4 - DisneyLand</option>
+          <option value="26.html">Jour 5 - Photo Paris</option>
+          <option value="27.html">Jour 6 - Froid, Chenaudière</option>
+          <option value="28.html">Jour 7 - Effet papillon 1</option>
+          <option value="29.html">Jour 8 - Paris / Versailles</option>
+          <option value="30.html">Jour 9 - Découvertes</option>
+          <option value="1.html">Jour 10 - Effet papillon 2</option>
+          <option value="2.html">Jour 11 - Donon + FAV</option>
+          <option value="3.html">Jour 12 - Famille</option>
+          <option value="4.html">Jour 13 - BG</option>
+          <option value="5.html">Jour 14 - ❓Quizz❓</option>
+          <option value="6.html">Jour 15 - Neuschwanstein</option>
+          <option value="7.html">Jour 16 - Horror / CandleLight</option>
+          <option value="8.html">Jour 17 - Sofia</option>
+          <option value="9.html">Jour 18 - The end 🥹</option>
+        </select>
+      </li>
+    </ul>
+  </nav>
 
-        <div class="polaroid" id="photoContainer">
-            <div id="mediaContainer"></div>
+  <!-- CONTENU -->
+  <main>
+    <h1>❤️ Bienvenue ❤️ <br> sur ton site d’Amour </h1>
+    <p>Quel souvenir veux tu revoir aujourd'hui ?</p>
 
-            <p class="caption" id="caption"></p>
-        </div>
+    <div class="day-selector">
+      <label for="daysMain">📖 Accéder à un jour :</label><br>
+      <select id="daysMain" onchange="goToDay(this.value)">
+        <option value="">-- Choisir un jour --</option>
+        <option value="earlybird.html">Earlybird</option>
+        <option value="22.html">Jour 1 - Bienvenue aux US</option>
+        <option value="23.html">Jour 2 - Photo de bienvenue</option>
+        <option value="24.html">Jour 3 - Italie / Dolomites</option>
+        <option value="25.html">Jour 4 - DisneyLand</option>
+        <option value="26.html">Jour 5 - Photo Paris</option>
+        <option value="27.html">Jour 6 - Froid, Chenaudière</option>
+        <option value="28.html">Jour 7 - Effet papillon 1</option>
+        <option value="29.html">Jour 8 - Paris / Versailles</option>
+        <option value="30.html">Jour 9 - Découvertes</option>
+        <option value="1.html">Jour 10 - Effet papillon 2</option>
+        <option value="2.html">Jour 11 - Donon + FAV</option>
+        <option value="3.html">Jour 12 - Famille</option>
+        <option value="4.html">Jour 13 - BG</option>
+        <option value="5.html">Jour 14 - ❓Quizz❓</option>
+        <option value="6.html">Jour 15 - Neuschwanstein</option>
+        <option value="7.html">Jour 16 - Horror / CandleLight</option>
+        <option value="8.html">Jour 17 - Sofia</option>
+        <option value="9.html">Jour 18 - The end 🥹</option>
+      </select>
+    </div>
+  </main>
 
-        <p class="quote bottom" id="quoteBottom">⬅️Swipe pour découvrir d’autres souvenirs➡️</p>
-    </main>
+  <footer>
+    © Mon Album de Souvenirs · Créé avec amour ❤️
+  </footer>
 
-    <footer>© Mon Album de Souvenirs · Créé avec amour ❤️</footer>
+  <script>
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("active");
+    }
 
-    <script>
-        updatePhoto();
-
-        const photos = [
-            {
-                type: "txt",
-                src: "",
-                top: "",
-                content: `
-                <p>Ou en serait-on si tous ça n'était pas arrivé ? Nul ne le sait. </p>
-                <p>
-                    Il y a eu beaucoup de facteurs à notre rencontre, pour moi ça aura été deux personnes, que je tiens dans mon coeur. 
-                    Auguste et Paul. 
-                </p> 
-                <p>Et toi c'est quoi ton effet papillon ?</p>
-                <p>Evidemment sans cette alchimie entre nous on n'en serai pas ici aujourd'hui.</p>
-                <p>Tu as été mis sur ma route pour une raison et mes copains m'ont aidé à le voir. <br>
-                   Maintenant tu fais partie de ma vie et je suis l'homme le plus chanceux du monde. 
-                </p>
-                <p>Je nous vois ensemble pour la vie, et je ne mache pas mes mots. Tu seras ma femme j'en suis persuadé</p> `,
-                caption: "Je t'aime de tout mon coeur mon amour ❤️",
-                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
-            },
-            {
-                type: "img",
-                src: "../Images/Costume_mariage_us.jpg",
-                top: "",
-                caption: " J'ai tellement de chance d'avoir rencontré une personne aussi incroyable et magnifique que toi ❤️",
-                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
-            }
-        ];
-
-        let current = 0;
-
-        function updatePhoto() {
-            const photoContainer = document.getElementById("photoContainer");
-            const mediaContainer = document.getElementById("mediaContainer");
-
-            photoContainer.classList.add("fade-out");
-
-            setTimeout(() => {
-                // Génère soit une image soit une vidéo
-                if (photos[current].type === "img") {
-                    mediaContainer.innerHTML = `<img src="${photos[current].src}" alt="Souvenir">`;
-                } else if (photos[current].type === "video") {
-                    mediaContainer.innerHTML = `
-                        <video controls autoplay muted loop>
-                            <source src="${photos[current].src}" type="video/mp4">
-                            Ton navigateur ne supporte pas la vidéo.
-                        </video>
-                    `;
-                }
-                else if (photos[current].type === "txt") {
-                    mediaContainer.innerHTML = photos[current].content;
-                    // photoContainer.classList.add("hidden");
-                }
-
-                document.getElementById("quoteTop").textContent = photos[current].top;
-                document.getElementById("quoteBottom").textContent = photos[current].bottom;
-                document.getElementById("caption").textContent = photos[current].caption;
-
-                photoContainer.classList.remove("fade-out");
-            }, 400);
-        }
-
-
-
-        // Gestion du swipe
-        const photoContainer = document.getElementById("photoContainer");
-        let startX = 0;
-
-        photoContainer.addEventListener("touchstart", (e) => {
-            startX = e.touches[0].clientX;
-        });
-
-        photoContainer.addEventListener("touchend", (e) => {
-            const endX = e.changedTouches[0].clientX;
-            const diff = startX - endX;
-
-            if (Math.abs(diff) > 50) { // seuil de swipe
-                if (diff > 0) {
-                    // swipe gauche → photo suivante
-                    current = (current + 1) % photos.length;
-                } else {
-                    // swipe droite → photo précédente
-                    current = (current - 1 + photos.length) % photos.length;
-                }
-                updatePhoto();
-            }
-        });
-    </script>
-
-    <script type="text/javascript" src="../scripts/nav_fleches.js"></script>
-
+    function goToDay(page) {
+      if (page) window.location.href = page;
+    }
+  </script>
 </body>
 
 </html>

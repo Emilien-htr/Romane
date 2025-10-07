@@ -1,0 +1,79 @@
+.home-btn,
+.burger {
+  position: fixed;
+  top: 15px;
+  cursor: pointer;
+  z-index: 1200;
+  text-decoration: none;
+  color: #333;
+  font-size: 1.8rem;
+  font-weight: bold;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.home-btn {
+  left: 15px;
+}
+
+.burger {
+  right: 15px;
+  font-size: 2rem;
+}
+
+/* MENU BURGER */
+nav {
+  position: fixed;
+  top: 0;
+  right: -260px;
+  /* caché par défaut */
+  width: 260px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  /* translucide */
+  box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
+  padding: 2rem 1rem;
+  transition: right 0.3s ease;
+  z-index: 1100;
+  visibility: hidden;
+  text-align: left;
+}
+
+nav.active {
+  right: 0;
+  visibility: visible;
+}
+
+nav h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  margin: 1rem 0;
+  font-size: 1.1rem;
+}
+
+nav ul li a {
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: #444;
+}
+
+nav select {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 0.5rem;
+}

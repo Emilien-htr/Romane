@@ -1,6 +1,7 @@
 <!-- jour 18 - finale -->
-<!-- A modifier  -->
 
+<!-- Rajouter navigation -->
+ 
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -18,7 +19,7 @@
         .polaroid {
             text-align: left;
             line-height: 1.6;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-family: "Georgia", serif;
             color: #444;
         }
@@ -26,12 +27,12 @@
 </head>
 
 <body>
-    <h1>❤️ Jour a modifier ❤️ </h1>
+    <h1>❤️ Jour 18 ❤️ </h1>
 
     <main>
         <!-- /* Navigation flèches */  -->
-        <div class="nav left" onclick="prevPhoto()">&#10094;</div>
-        <div class="nav right" onclick="nextPhoto()">&#10095;</div>
+        <!-- <div class="fleche left" onclick="prevPhoto()">&#10094;</div>
+        <div class="fleche right" onclick="nextPhoto()">&#10095;</div> -->
         <!-- A enlever avant de publier -->
 
         <p class="quote top" id="quoteTop"></p>
@@ -52,29 +53,75 @@
 
         const photos = [
             {
-                type: "txt",
+                type: "text",
                 src: "",
                 top: "",
                 content: `
-                <p>Ou en serait-on si tous ça n'était pas arrivé ? Nul ne le sait. </p>
-                <p>
-                    Il y a eu beaucoup de facteurs à notre rencontre, pour moi ça aura été deux personnes, que je tiens dans mon coeur. 
-                    Auguste et Paul. 
-                </p> 
-                <p>Et toi c'est quoi ton effet papillon ?</p>
-                <p>Evidemment sans cette alchimie entre nous on n'en serai pas ici aujourd'hui.</p>
-                <p>Tu as été mis sur ma route pour une raison et mes copains m'ont aidé à le voir. <br>
-                   Maintenant tu fais partie de ma vie et je suis l'homme le plus chanceux du monde. 
-                </p>
-                <p>Je nous vois ensemble pour la vie, et je ne mache pas mes mots. Tu seras ma femme j'en suis persuadé</p> `,
-                caption: "Je t'aime de tout mon coeur mon amour ❤️",
-                bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
+                    <p> Et voila aujourd'hui ton voyage aux Etats-Unis touche à sa fin. <br>
+                        Ce qui veut dire aussi que cette page est la dernière de ce site.</p>
+                    <p> J’espère que m’avoir à tes côtés durant tout ce voyage t’aura apporté le sourire, donné de la force et surtout aidé à patienter jusqu’à nos retrouvailles.</p>
+                    <p> J’espère avoir pu t’apporter de la joie, fait oublier la fatigue et avoir rendu le décalage horaire moins difficile à survivre.</p>
+                    `,
+                caption: "Pour moi faire ce site a été un moyen de penser à toi chaque jour et me remémorer tous les bons souvenirs qu’on a pu avoir ensemble.",
+                bottom: "⬅️Swipe pour lire la suite➡️"
+            },
+            {
+                type: "text",
+                src: "",
+                top: "",
+                content: `
+                    <p>
+                        Il y a eu des moments plus difficiles que d’autres et je n’étais pas toujours motivé ou inspiré pour continuer. 
+                        Mais ça a été un plaisir de réaliser ce site pour toi, en sachant que je te ferai esquisser un sourire ou possiblement une larme.
+                    </p>
+                    <p>
+                        Également, j’ai aimé être occupé sur ce projet et ça m’a fait du bien. 
+                        J’ai pu prendre du temps pour moi et je me rends compte de l’importance de penser à soi. 
+                    </p>
+                    <p>
+                        Bien que je ne pense pas avoir réussi à vaincre mes penchants les plus déviants et difficiles, je sens bien qu’il faut que je continu sur cette lancée. 
+                    </p>
+                    `,
+                caption: "En plus, maintenant que je sais que je vais rentrer, je suis encore plus motivé.",
+                bottom: "⬅️Swipe pour lire la suite➡️"
+            },
+            {
+                type: "text",
+                src: "",
+                top: "",
+                content: `
+                    <p>
+                        Mais ça suffit, je ne veux plus être seul et ne veux plus te lâcher une seule seconde maintenant. <br>
+                        Je vais essayer de penser plus à moi, je te le promets. 
+                        Je veux évoluer pour nous et être le meilleur petit copain pour la meilleure des copines. 
+                    </p>
+                    <p>
+                        Maintenant je veux juste être un gros canard avec ma chérie, et penser rien qu’à toi pendant quelques semaines. <br>
+                        Je veux retrouver ton odeur dans mon lit, ta chaleur dans mes bras, tes cheveux sur mes vêtements, ta petite bouille pour la couvrir de bisous. 
+                    </p>
+                    `,
+                caption: "Ton absence m’a confirmé une chose, je suis amoureux de toi et je veux être avec toi pour toujours.",
+                bottom: "⬅️Swipe pour lire la suite➡️"
+            },
+            {
+                type: "text",
+                src: "",
+                top: "",
+                content: `
+                    <p>
+                        Il ne reste plus que quelques heures pour toi jusqu’à ce que tu rentres, ton vol en avion va être long mais chaque minute te rapprochera de moi.
+                    </p>
+                    <p>Je te souhaite de passer un bon vol retour et je suis impatient de te revoir.</p>
+                    <p>Il faudra malheureusement attendre jusqu’à vendredi encore pour pouvoir te serrer dans mes bras. Je suis tellement impatient !</p>
+                    `,
+                caption: "Je t'aime de tout mon coeur Romane ❤️, tu es un ange venu pour me rendre meilleur, ma reine qui à trouvé son roi, mon petit chou tout mignon.",
+                bottom: "⬅️Swipe pour lire la suite➡️"
             },
             {
                 type: "img",
                 src: "../Images/Costume_mariage_us.jpg",
                 top: "",
-                caption: " J'ai tellement de chance d'avoir rencontré une personne aussi incroyable et magnifique que toi ❤️",
+                caption: "Une dernière photo pour la route ❤️",
                 bottom: "⬅️Swipe pour découvrir d’autres souvenirs➡️"
             }
         ];
@@ -99,7 +146,7 @@
                         </video>
                     `;
                 }
-                else if (photos[current].type === "txt") {
+                else if (photos[current].type === "text") {
                     mediaContainer.innerHTML = photos[current].content;
                     // photoContainer.classList.add("hidden");
                 }

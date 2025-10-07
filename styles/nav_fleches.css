@@ -1,4 +1,4 @@
-.nav {
+.fleche {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
@@ -12,10 +12,10 @@
     transition: background 0.2s, transform 0.2s;
 }
 
-.nav.left {
+.fleche.left {
     left: 10px;
 }
 
-.nav.right {
+.fleche.right {
     right: 10px;
 }
